@@ -14,12 +14,6 @@ public class FornecedorDao extends DaoPadrao {
     public static final String PESQUISADUPLICIDADE = "Select CODFOR, NOMRAZ, CPFCNPJ from FORNECEDORES where NOMRAZ = ? or CPFCNPJ = ? "; //or RGIE = ?
     public static final String SQLCOMBOBOX = "Select CODFOR, NOMRAZ From FORNECEDORES where SITFOR = 'A'"; //or RGIE = ?
     public final String PESQUISASQL = "SELECT CODFOR, NOMRAZ, APEFAN, CPFCNPJ FROM FORNECEDORES";
-    private final String INSERTSQL = "INSERT INTO FORNECEDORES VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE FORNECEDORES SET TIPFOR = ?, NOMRAZ = ?, APEFAN = ?, RGIE = ?, DATNAS = ?, "
-            + "CPFCNPJ = ?, CEPFOR = ?, ENDFOR = ?, NUMEND = ?, CPLEND = ?, TELFOR = ?, CELFOR = ?, EMAILFOR = ?, "
-            + "OBSFOR = ?, CODCID = ? , SITFOR = ? WHERE CODFOR = ?";
-    private final String DELETESQL = "DELETE FROM FORNECEDORES WHERE CODFOR = ?";
-    private final String CONSULTASQL = "SELECT * FROM FORNECEDORES WHERE CODFOR = ?";
     private Fornecedor fornecedor;
 
     public FornecedorDao(Fornecedor fornecedor) {
@@ -28,6 +22,7 @@ public class FornecedorDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO FORNECEDORES VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             fornecedor.setCodfor(pegaGenerator("GFORNECEDORES"));
             ps.setInt(1, fornecedor.getCodfor());
@@ -58,6 +53,9 @@ public class FornecedorDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE FORNECEDORES SET TIPFOR = ?, NOMRAZ = ?, APEFAN = ?, RGIE = ?, DATNAS = ?, "
+                    + "CPFCNPJ = ?, CEPFOR = ?, ENDFOR = ?, NUMEND = ?, CPLEND = ?, TELFOR = ?, CELFOR = ?, EMAILFOR = ?, "
+                    + "OBSFOR = ?, CODCID = ? , SITFOR = ? WHERE CODFOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, fornecedor.getTipfor());
             ps.setString(2, fornecedor.getNomraz());
@@ -87,6 +85,7 @@ public class FornecedorDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM FORNECEDORES WHERE CODFOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, fornecedor.getCodfor());
             ps.executeUpdate();
@@ -100,6 +99,7 @@ public class FornecedorDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM FORNECEDORES WHERE CODFOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, fornecedor.getCodfor());
             ResultSet rs = ps.executeQuery();

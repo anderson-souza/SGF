@@ -13,10 +13,6 @@ public class ProdutoDao extends DaoPadrao {
     public static final String SQLCOMBOBOX = "Select CODPRO, DESPRO From PRODUTO where SITPRO = 'A'";
     public static final String PESQUISADUPLICIDADE = "Select CODPRO, DESPRO from PRODUTO where DESPRO = ?";
     public final String PESQUISASQL = "SELECT CODPRO, DESPRO, CODCOR, CODSCT FROM PRODUTO";
-    private final String INSERTSQL = "INSERT INTO PRODUTO VALUES(?,?,?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE PRODUTO SET DESPRO = ?, QTDPRO = ?, PRECUS = ?, PREVEN = ?, CODCOR = ?, CODSCT = ?, SITPRO = ? WHERE CODPRO = ?";
-    private final String DELETESQL = "DELETE FROM PRODUTO WHERE CODPRO = ?";
-    private final String CONSULTASQL = "SELECT * FROM PRODUTO WHERE CODPRO = ?";
     private Produto produto;
 
     public ProdutoDao(Produto produto) {
@@ -29,6 +25,7 @@ public class ProdutoDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO PRODUTO VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             produto.setCodpro(pegaGenerator("GPRODUTO"));
             ps.setInt(1, produto.getCodpro());
@@ -50,6 +47,7 @@ public class ProdutoDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE PRODUTO SET DESPRO = ?, QTDPRO = ?, PRECUS = ?, PREVEN = ?, CODCOR = ?, CODSCT = ?, SITPRO = ? WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, produto.getDespro());
             ps.setInt(2, produto.getQtdpro());
@@ -70,6 +68,7 @@ public class ProdutoDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM PRODUTO WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, produto.getCodpro());
             ps.executeUpdate();
@@ -83,6 +82,7 @@ public class ProdutoDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM PRODUTO WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, produto.getCodpro());
             ResultSet rs = ps.executeQuery(); //SELECT CODPRO, DESPRO, CODCOR, CODSCT FROM PRODUTO

@@ -76,7 +76,7 @@ public class TelaCadastroEstado extends TelaCadastro {
         super.incluirBD();
         boolean duplicidade = estadoDao.duplicidade();
         boolean retorno = estadoDao.inserir();
-        if (retorno == true && duplicidade == true) {
+        if (retorno && duplicidade) {
             getPersistencia();
         }
         return retorno;

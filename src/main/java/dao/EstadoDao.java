@@ -13,10 +13,6 @@ public class EstadoDao extends DaoPadrao {
     //public static final String COMBOBOX = "SELECT CODEST, NOMEST FROM E001EST ORDER BY NOMEST";
     public static final String PESQUISADUPLICIDADE = "Select CODEST, NOMEST, SIGEST from ESTADO where NOMEST = ? or SIGEST = ?";
     public final String PESQUISASQL = "SELECT CODEST, NOMEST, SIGEST, CODPAI FROM ESTADO";
-    private final String INSERTSQL = "INSERT INTO ESTADO VALUES(?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE ESTADO SET NOMEST = ?, SIGEST = ?, CODPAI = ?, OBSEST = ?, SITEST = ? WHERE CODEST = ?";
-    private final String DELETESQL = "DELETE FROM ESTADO WHERE CODEST = ?";
-    private final String CONSULTASQL = "SELECT * FROM ESTADO WHERE CODEST = ?";
     private Estado estado;
 
     public EstadoDao(Estado estado) {
@@ -25,6 +21,7 @@ public class EstadoDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO ESTADO VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             estado.setCodest(pegaGenerator("GESTADO"));
             ps.setInt(1, estado.getCodest());
@@ -44,6 +41,7 @@ public class EstadoDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE ESTADO SET NOMEST = ?, SIGEST = ?, CODPAI = ?, OBSEST = ?, SITEST = ? WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, estado.getNomest());
             ps.setString(2, estado.getSigest());
@@ -62,6 +60,7 @@ public class EstadoDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM ESTADO WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, estado.getCodest());
             ps.executeUpdate();
@@ -75,6 +74,7 @@ public class EstadoDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM ESTADO WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, estado.getCodest());
             ResultSet rs = ps.executeQuery();

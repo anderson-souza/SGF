@@ -1,6 +1,7 @@
 package componentes;
 
-import javax.swing.*;
+
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class MeuCampoCpf extends MeuCampoFormatado implements MeuComponente {

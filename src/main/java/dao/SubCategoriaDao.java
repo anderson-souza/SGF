@@ -12,10 +12,6 @@ public class SubCategoriaDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODSCT, DESSCT from SUBCATEGORIA where DESSCT = ?";
     public final String PESQUISASQL = "SELECT CODSCT, DESSCT FROM SUBCATEGORIA";
-    private final String INSERTSQL = "INSERT INTO SUBCATEGORIA VALUES(?,?,?,?)";
-    private final String UPDATESQL = "UPDATE SUBCATEGORIA SET DESSCT = ?, CODCAT = ?, SITCSCT = ? WHERE CODSCT = ?";
-    private final String DELETESQL = "DELETE FROM SUBCATEGORIA WHERE CODSCT = ?";
-    private final String CONSULTASQL = "SELECT * FROM SUBCATEGORIA WHERE CODSCT = ?";
     private SubCategoria subCategoria;
 
     public SubCategoriaDao(SubCategoria subCategoria) {
@@ -24,6 +20,7 @@ public class SubCategoriaDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO SUBCATEGORIA VALUES(?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             subCategoria.setCodsct(pegaGenerator("GSUBCATEGORIA"));
             ps.setInt(1, subCategoria.getCodsct());
@@ -41,6 +38,7 @@ public class SubCategoriaDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE SUBCATEGORIA SET DESSCT = ?, CODCAT = ?, SITCSCT = ? WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, subCategoria.getDessct());
             ps.setInt(2, subCategoria.getCategoria().getCodcat());
@@ -57,6 +55,7 @@ public class SubCategoriaDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM SUBCATEGORIA WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, subCategoria.getCodsct());
             ps.executeUpdate();
@@ -70,6 +69,7 @@ public class SubCategoriaDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM SUBCATEGORIA WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, subCategoria.getCodsct());
             ResultSet rs = ps.executeQuery();

@@ -16,11 +16,6 @@ import java.util.List;
 public class CompraDao extends DaoPadrao {
 
     public final String PESQUISASQL = "SELECT CODCPR, CODFOR, DATCPR, STACPR, SITCPR FROM COMPRAS  order by 1";
-    private final String INSERTSQL = "INSERT INTO COMPRAS VALUES(?,?,?,?,?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE COMPRAS SET STACPR = ?, SITCPR = ? WHERE CODCPR = ?";
-    private final String DELETESQL = "DELETE FROM COMPRAS WHERE CODCPR = ?";
-    private final String CONSULTASQL = "SELECT * FROM COMPRAS WHERE CODCPR = ?";
-    private final String SQLCONSULTARITENS = "SELECT CODITC FROM ITEMCOMPRA WHERE CODCPR = ?";
     //public static final String COMBOBOX = "SELECT CODEST, NOMEST FROM E001EST ORDER BY NOMEST";
     //public static final String PESQUISADUPLICIDADE = "Select CODEST, NOMEST, SIGEST from ESTADO where NOMEST = ? or SIGEST = ?";
     private Compra Compra;
@@ -31,6 +26,7 @@ public class CompraDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO COMPRAS VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             Compra.setCodcpr(pegaGenerator("GCOMPRA"));
             ps.setInt(1, Compra.getCodcpr());
@@ -67,6 +63,7 @@ public class CompraDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE COMPRAS SET STACPR = ?, SITCPR = ? WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, Compra.getStacpr());
             ps.setString(2, Compra.getSitcpr());
@@ -101,6 +98,7 @@ public class CompraDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM COMPRAS WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, Compra.getCodcpr());
             ps.executeUpdate();
@@ -114,6 +112,7 @@ public class CompraDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM COMPRAS WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, Compra.getCodcpr());
             ResultSet rs = ps.executeQuery();
@@ -148,6 +147,7 @@ public class CompraDao extends DaoPadrao {
             Produto produto = new Produto();
             ProdutoDao produtoDao = new ProdutoDao(produto);
             ItemCompra itemCompra;
+            String SQLCONSULTARITENS = "SELECT CODITC FROM ITEMCOMPRA WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLCONSULTARITENS);
             ps.setInt(1, Compra.getCodcpr());
             ResultSet rs = ps.executeQuery();

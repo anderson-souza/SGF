@@ -12,10 +12,6 @@ public class CategoriaDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODCAT, DESCAT from CATEGORIA where DESCAT = ?";
     public final String PESQUISASQL = "SELECT CODCAT, DESCAT, SITCAT FROM CATEGORIA";
-    private final String INSERTSQL = "INSERT INTO CATEGORIA VALUES(?,?,?)";
-    private final String UPDATESQL = "UPDATE CATEGORIA SET DESCAT = ?, SITCAT = ? WHERE CODCAT = ?";
-    private final String DELETESQL = "DELETE FROM CATEGORIA WHERE CODCAT = ?";
-    private final String CONSULTASQL = "SELECT * FROM CATEGORIA WHERE CODCAT = ?";
     private Categoria categoria;
 
     public CategoriaDao(Categoria categoria) {
@@ -24,6 +20,7 @@ public class CategoriaDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO CATEGORIA VALUES(?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             categoria.setCodcat(pegaGenerator("GCATEGORIA"));
             ps.setInt(1, categoria.getCodcat());
@@ -40,6 +37,7 @@ public class CategoriaDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE CATEGORIA SET DESCAT = ?, SITCAT = ? WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, categoria.getDescat());
             ps.setString(2, categoria.getSitcat());
@@ -55,6 +53,7 @@ public class CategoriaDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM CATEGORIA WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, categoria.getCodcat());
             ps.executeUpdate();
@@ -68,6 +67,7 @@ public class CategoriaDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM CATEGORIA WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, categoria.getCodcat());
             ResultSet rs = ps.executeQuery();

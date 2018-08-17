@@ -43,10 +43,7 @@ public class MeuCampoData extends MeuCampoFormatado {
             dataNascimento.setTime(dataVerificavel);
             GregorianCalendar dataAtual = new GregorianCalendar();
             dataAtual.add(GregorianCalendar.YEAR, +0);
-            if (dataNascimento.after(dataAtual)) {
-                return false;
-            }
-            return true;
+            return !dataNascimento.after(dataAtual);
         } catch (ParseException ex) {
             return false;
         }

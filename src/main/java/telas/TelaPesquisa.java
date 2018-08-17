@@ -19,7 +19,6 @@ public class TelaPesquisa extends JInternalFrame implements InternalFrameListene
     private String[] titulos;
     private TelaCadastro tela;
     private JTable tabela;
-    private JScrollPane jsp;
     private DefaultTableModel dtm = new DefaultTableModel();
 
     public TelaPesquisa(String tituloJanela, String sql, String[] titulos, TelaCadastro tela) {
@@ -37,7 +36,7 @@ public class TelaPesquisa extends JInternalFrame implements InternalFrameListene
         for (int i = 0; i < titulos.length; i++) {
             dtm.addColumn(titulos[i]);
         }
-        jsp = new JScrollPane(tabela);
+        JScrollPane jsp = new JScrollPane(tabela);
         getContentPane().add(jsp);
         preencher();
         pack();

@@ -12,10 +12,6 @@ public class MoveisDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODMOV, DESMOV from MOVEIS where DESMOV = ?";
     public final String PESQUISASQL = "SELECT CODMOV, DESMOV, CODCOR, CODSCT FROM MOVEIS";
-    private final String INSERTSQL = "INSERT INTO MOVEIS VALUES(?,?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE MOVEIS SET DESMOV = ?, QTDMOV = ?, VLRALU = ?, CODCOR = ?, CODSCT = ?, SITMOV = ? WHERE CODMOV = ?";
-    private final String DELETESQL = "DELETE FROM MOVEIS WHERE CODMOV = ?";
-    private final String CONSULTASQL = "SELECT * FROM MOVEIS WHERE CODMOV = ?";
     private Moveis moveis;
 
     public MoveisDao(Moveis moveis) {
@@ -24,6 +20,7 @@ public class MoveisDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO MOVEIS VALUES(?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             moveis.setCodmov(pegaGenerator("GPRODUTO"));
             ps.setInt(1, moveis.getCodmov());
@@ -44,6 +41,7 @@ public class MoveisDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE MOVEIS SET DESMOV = ?, QTDMOV = ?, VLRALU = ?, CODCOR = ?, CODSCT = ?, SITMOV = ? WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, moveis.getDesmov());
             ps.setInt(2, moveis.getQtdmov());
@@ -63,6 +61,7 @@ public class MoveisDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM MOVEIS WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, moveis.getCodmov());
             ps.executeUpdate();
@@ -76,6 +75,7 @@ public class MoveisDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM MOVEIS WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, moveis.getCodmov());
             ResultSet rs = ps.executeQuery(); //SELECT CODPRO, DESPRO, CODCOR, CODSCT FROM PRODUTO

@@ -12,10 +12,6 @@ public class CidadeDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODCID, NOMCID, CODEST from CIDADE where NOMCID = ? and CODEST = ?";
     public final String PESQUISASQL = "SELECT CODCID, NOMCID, CODEST FROM CIDADE";
-    private final String INSERTSQL = "INSERT INTO CIDADE VALUES(?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE CIDADE SET NOMCID = ?, CODEST = ?, OBSCID = ?, SITCID = ? WHERE CODCID = ?";
-    private final String DELETESQL = "DELETE FROM CIDADE WHERE CODCID = ?";
-    private final String CONSULTASQL = "SELECT * FROM CIDADE WHERE CODCID = ?";
     private Cidade cidade;
 
     public CidadeDao(Cidade cidade) {
@@ -24,6 +20,7 @@ public class CidadeDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO CIDADE VALUES(?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             cidade.setCodcid(pegaGenerator("GCIDADE"));
             ps.setInt(1, cidade.getCodcid());
@@ -42,6 +39,7 @@ public class CidadeDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE CIDADE SET NOMCID = ?, CODEST = ?, OBSCID = ?, SITCID = ? WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, cidade.getNomCid());
             ps.setInt(2, cidade.getEstado().getCodest());
@@ -59,6 +57,7 @@ public class CidadeDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM CIDADE WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, cidade.getCodcid());
             ps.executeUpdate();
@@ -72,6 +71,7 @@ public class CidadeDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM CIDADE WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, cidade.getCodcid());
             ResultSet rs = ps.executeQuery();

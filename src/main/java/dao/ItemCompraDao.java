@@ -9,12 +9,6 @@ import java.sql.ResultSet;
 
 public class ItemCompraDao extends DaoPadrao {
 
-    private final String SQLINCLUIR = "INSERT INTO ITEMCOMPRA VALUES (?, ?, ?, ?, ?, ?)";
-    private final String SQLALTERAR = "UPDATE ITEMCOMPRA SET CODCPR = ?, CODPRO = ?, CODMOV = ?, QTDCPR = ?, VLRUNI = ?,"
-            + "VLRDES = ? WHERE CODITC = ?";
-    private final String SQLEXCLUIR = "DELETE FROM ITEMCOMPRA WHERE CODITC = ?";
-    private final String SQLCONSULTAR = "SELECT I.CODITC, I.CODCPR, I.CODPRO, P.DESPRO, I.QTDITC,"
-            + "I.QTDITC, I.VLRUNI, I.VLRDES FROM ITEMCOMPRA I, PRODUTO P WHERE I.CODITC = ? and I.CODPRO = P.CODPRO";
     private ItemCompra itemCompra;
 
     public void setitemCompra(ItemCompra itemCompra) {
@@ -23,6 +17,7 @@ public class ItemCompraDao extends DaoPadrao {
 
     public boolean incluir() {
         try {
+            String SQLINCLUIR = "INSERT INTO ITEMCOMPRA VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLINCLUIR);
             itemCompra.setCoditc(pegaGenerator("GITEMCOMPRA"));
             ps.setInt(1, itemCompra.getCoditc());
@@ -42,6 +37,8 @@ public class ItemCompraDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String SQLALTERAR = "UPDATE ITEMCOMPRA SET CODCPR = ?, CODPRO = ?, CODMOV = ?, QTDCPR = ?, VLRUNI = ?,"
+                    + "VLRDES = ? WHERE CODITC = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLALTERAR);
             ps.setInt(1, itemCompra.getCodcpr().getCodcpr());
             ps.setInt(2, itemCompra.getCodpro().getCodpro());
@@ -60,6 +57,7 @@ public class ItemCompraDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String SQLEXCLUIR = "DELETE FROM ITEMCOMPRA WHERE CODITC = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLEXCLUIR);
             ps.setInt(1, itemCompra.getCoditc());
             ps.executeUpdate();
@@ -72,6 +70,8 @@ public class ItemCompraDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String SQLCONSULTAR = "SELECT I.CODITC, I.CODCPR, I.CODPRO, P.DESPRO, I.QTDITC,"
+                    + "I.QTDITC, I.VLRUNI, I.VLRDES FROM ITEMCOMPRA I, PRODUTO P WHERE I.CODITC = ? and I.CODPRO = P.CODPRO";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLCONSULTAR);
             ps.setInt(1, itemCompra.getCoditc());
             ResultSet rs = ps.executeQuery();

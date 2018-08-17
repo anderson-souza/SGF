@@ -2,8 +2,10 @@ package sistemas;
 
 import telas.TelaSistema;
 
-import javax.swing.*;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+
+import static java.lang.System.*;
 
 public class Sistema {
 
@@ -20,8 +22,6 @@ public class Sistema {
         }
 
         TelaSistema telaSistema = new TelaSistema();
-        /*Garbage Colector GC*/
-        System.gc();
         //Dados.usuarioLogado.setId(1); // Forçando o usuário logado enquanto não temos a tela de login
     }
 }

@@ -15,13 +15,12 @@ public class MeuCampoRadioButton extends JRadioButton implements MeuComponente {
      bgroup.add(maybeButton);*/
 
     private String dica1;
-    private boolean cond1;
     private String dica2;
     private boolean cond2;
 
     public MeuCampoRadioButton(String dica1, boolean cond1/*, String dica2, boolean cond2*/) {
         this.dica1 = dica1;
-        this.cond1 = cond1;
+        boolean cond11 = cond1;
         /*this.dica2 = dica2;
          this.cond2 = cond2;*/
     }

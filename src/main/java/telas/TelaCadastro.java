@@ -183,25 +183,25 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
     }
 
     public boolean validarCampos() {
-        String erroObrigatorio = "";
+        StringBuilder erroObrigatorio = new StringBuilder();
         for (int i = 0; i < campos.size(); i++) {
             if ((campos.get(i).eObrigatorio()) && (campos.get(i).eVazio())) {
-                erroObrigatorio = erroObrigatorio + campos.get(i).getDica() + "\n";
+                erroObrigatorio.append(campos.get(i).getDica()).append("\n");
             }
         }
-        String erroValidacao = "";
+        StringBuilder erroValidacao = new StringBuilder();
         for (int i = 0; i < campos.size(); i++) {
             if (!campos.get(i).eValido()) {
-                erroValidacao = erroValidacao + campos.get(i).getDica() + "\n";
+                erroValidacao.append(campos.get(i).getDica()).append("\n");
             }
         }
         boolean retorno = true;
-        if (!erroObrigatorio.isEmpty()) {
+        if (erroObrigatorio.length() > 0) {
             JOptionPane.showMessageDialog(this, "Os campos abaixo são obrigatórios e não foram informados:\n" + erroObrigatorio);
             retorno = false;
         }
 
-        if (!erroValidacao.isEmpty()) {
+        if (erroValidacao.length() > 0) {
             JOptionPane.showMessageDialog(this, "Os campos abaixo são inválidos: \n" + erroValidacao);
             retorno = false;
         }

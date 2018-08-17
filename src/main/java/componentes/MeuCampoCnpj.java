@@ -5,13 +5,12 @@ import javax.swing.text.MaskFormatter;
 
 public class MeuCampoCnpj extends MeuCampoFormatado implements MeuComponente {
 
-    private boolean podeHabilitar;
     private boolean obrigatorio;
     private String dica;
 
     public MeuCampoCnpj(int colunas, boolean obrigatorio, String dica, boolean podeHabilitar) {
         super(colunas, obrigatorio, dica, podeHabilitar);
-        this.podeHabilitar = podeHabilitar;
+        boolean podeHabilitar1 = podeHabilitar;
         this.obrigatorio = obrigatorio;
         this.dica = dica;
 

@@ -51,7 +51,6 @@ public class TelaCompra extends TelaCadastro {
     private MeuCampoMonetario campoDescontoItem = new MeuCampoMonetario(15, false, true, false, "Desconto");
     private MeuCampoMonetario campoValorLiquidoItem = new MeuCampoMonetario(15, true, false, false, "Valor Líquido");
     private MeuCampoMonetario campoValorFrete = new MeuCampoMonetario(15, true, true, false, "Valor do Frete");
-    private JLabel jlItem = new JLabel("Item");
     private TableModelCompra tm = new TableModelCompra();
     private JTable tabela = new JTable(tm) {
         @Override
@@ -69,7 +68,6 @@ public class TelaCompra extends TelaCadastro {
             return c;
         }
     };
-    private JScrollPane jsp = new JScrollPane(tabela);
     private JPanel jpBotoesItem = new JPanel();
     private JButton jbConfirmarItem = new JButton("Ok");
     private JButton jbIncluirItem = new JButton("+");
@@ -93,6 +91,7 @@ public class TelaCompra extends TelaCadastro {
         adicionaCampo(1, 6, 1, 1, campoStatus);
         adicionaCampo(2, 6, 1, 1, campoSituacao);
         adicionaCampo(4, 1, 1, 1, campoValorFrete);
+        JLabel jlItem = new JLabel("Item");
         adicionaCampo(4, 2, 1, 1, jlItem);
         adicionaCampo(5, 1, 1, 2, campoProdutoItem);
         adicionaCampo(6, 1, 1, 1, campoValorUnitarioItem);
@@ -100,6 +99,7 @@ public class TelaCompra extends TelaCadastro {
         adicionaCampo(8, 1, 1, 1, campoDescontoItem);
         adicionaCampo(9, 1, 1, 1, campoValorLiquidoItem);
         adicionaCampo(8, 4, 1, 1, jpBotoesItem);
+        JScrollPane jsp = new JScrollPane(tabela);
         adicionaCampo(10, 1, 1, 7, jsp);
 
         jsp.setPreferredSize(new Dimension(800, 300));

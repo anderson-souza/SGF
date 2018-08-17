@@ -13,10 +13,6 @@ public class CondicaoPagamentoDao extends DaoPadrao {
     public static final String PESQUISADUPLICIDADE = "Select CODPGT, DESPGT, NUMPAR, PRAPAR, DIACAR from CONDICAOPGT where DESPGT = ? or NUMPAR = ? and PRAPAR = ? and DIACAR = ?";
     public static final String SQLCOMBOBOX = "Select Codpgt, Despgt from Condicaopgt where sitpgt = 'A'";
     public final String PESQUISASQL = "SELECT CODPGT, DESPGT, NUMPAR, PRAPAR, DIACAR FROM CONDICAOPGT";
-    private final String INSERTSQL = "INSERT INTO CONDICAOPGT VALUES(?,?,?,?,?,?)";
-    private final String UPDATESQL = "UPDATE CONDICAOPGT SET DESPGT = ?, NUMPAR = ?, PRAPAR = ?, DIACAR = ?, SITPGT = ? WHERE CODPGT = ?";
-    private final String DELETESQL = "DELETE FROM CONDICAOPGT WHERE CODPGT = ?";
-    private final String CONSULTASQL = "SELECT * FROM CONDICAOPGT WHERE CODPGT = ?";
     private CondicaoPagamento condicaoPagamento;
 
     public CondicaoPagamentoDao(CondicaoPagamento condicaoPagamento) {
@@ -25,6 +21,7 @@ public class CondicaoPagamentoDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO CONDICAOPGT VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             condicaoPagamento.setCodpgt(pegaGenerator("GCONDICAOPGTO"));
             ps.setInt(1, condicaoPagamento.getCodpgt());
@@ -45,6 +42,7 @@ public class CondicaoPagamentoDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE CONDICAOPGT SET DESPGT = ?, NUMPAR = ?, PRAPAR = ?, DIACAR = ?, SITPGT = ? WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, condicaoPagamento.getDespgt());
             ps.setInt(2, condicaoPagamento.getNumpar());
@@ -63,6 +61,7 @@ public class CondicaoPagamentoDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM CONDICAOPGT WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, condicaoPagamento.getCodpgt());
             ps.executeUpdate();
@@ -76,6 +75,7 @@ public class CondicaoPagamentoDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM CONDICAOPGT WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, condicaoPagamento.getCodpgt());
             ResultSet rs = ps.executeQuery(); //CODPGT, DESPGT, NUMPAR, PRAPAR, DIACAR

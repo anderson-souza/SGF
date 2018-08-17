@@ -12,10 +12,6 @@ public class PaisDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODPAI, NOMPAI from PAIS where NOMPAI = ?";
     public final String PESQUISASQL = "SELECT CODPAI, NOMPAI FROM PAIS";
-    private final String INSERTSQL = "INSERT INTO PAIS VALUES(?,?,?,?)";
-    private final String UPDATESQL = "UPDATE PAIS SET NOMPAI = ?, OBSPAI = ?, SITPAI = ? WHERE CODPAI = ?";
-    private final String DELETESQL = "DELETE FROM PAIS WHERE CODPAI = ?";
-    private final String CONSULTASQL = "SELECT * FROM PAIS WHERE CODPAI = ?";
     private Pais pais;
 
     public PaisDao(Pais pais) {
@@ -24,6 +20,7 @@ public class PaisDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO PAIS VALUES(?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             pais.setId(pegaGenerator("GPAIS"));
             ps.setInt(1, pais.getId());
@@ -41,6 +38,7 @@ public class PaisDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE PAIS SET NOMPAI = ?, OBSPAI = ?, SITPAI = ? WHERE CODPAI = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, pais.getNome());
             ps.setString(2, pais.getObs());
@@ -57,6 +55,7 @@ public class PaisDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM PAIS WHERE CODPAI = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, pais.getId());
             ps.executeUpdate();
@@ -70,6 +69,7 @@ public class PaisDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM PAIS WHERE CODPAI = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, pais.getId());
             ResultSet rs = ps.executeQuery();

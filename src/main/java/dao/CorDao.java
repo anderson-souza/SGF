@@ -12,10 +12,6 @@ public class CorDao extends DaoPadrao {
 
     public static final String PESQUISADUPLICIDADE = "Select CODCOR, DESCOR from COR where DESCOR = ?";
     public final String PESQUISASQL = "SELECT CODCOR, DESCOR FROM COR order by 1";
-    private final String INSERTSQL = "INSERT INTO COR VALUES(?,?,?)";
-    private final String UPDATESQL = "UPDATE COR SET DESCOR = ?, SITCOR = ? WHERE CODCOR = ?";
-    private final String DELETESQL = "DELETE FROM COR WHERE CODCOR = ?";
-    private final String CONSULTASQL = "SELECT * FROM COR WHERE CODCOR = ? order by 1";
     private Cor cor;        //Huehuebrbr
 
     public CorDao(Cor cor) {
@@ -24,6 +20,7 @@ public class CorDao extends DaoPadrao {
 
     public boolean inserir() {
         try {
+            String INSERTSQL = "INSERT INTO COR VALUES(?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
             cor.setCodcor(pegaGenerator("GCOR"));
             ps.setInt(1, cor.getCodCor());
@@ -40,6 +37,7 @@ public class CorDao extends DaoPadrao {
 
     public boolean alterar() {
         try {
+            String UPDATESQL = "UPDATE COR SET DESCOR = ?, SITCOR = ? WHERE CODCOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, cor.getDesCor());
             ps.setString(2, cor.getSitcor());
@@ -55,6 +53,7 @@ public class CorDao extends DaoPadrao {
 
     public boolean excluir() {
         try {
+            String DELETESQL = "DELETE FROM COR WHERE CODCOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
             ps.setInt(1, cor.getCodCor());
             ps.executeUpdate();
@@ -68,6 +67,7 @@ public class CorDao extends DaoPadrao {
 
     public boolean consultar() {
         try {
+            String CONSULTASQL = "SELECT * FROM COR WHERE CODCOR = ? order by 1";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
             ps.setInt(1, cor.getCodCor());
             ResultSet rs = ps.executeQuery();
