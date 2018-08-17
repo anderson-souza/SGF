@@ -7,10 +7,10 @@ import java.util.Date;
  */
 public class Fornecedor {
 
-    private int codfor;
-    private String tipfor;
-    private String nomraz;
-    private String apefan;
+    private int id;
+    private String tipoFornecedor; //Física ou Jurídica
+    private String razaoSocial;
+    private String nomeFantasia;
     private String rgie;
     private Date datnas;
     private String cpfcnpj;
@@ -33,36 +33,36 @@ public class Fornecedor {
         this.sitfor = sitfor;
     }
 
-    public int getCodfor() {
-        return codfor;
+    public int getId() {
+        return id;
     }
 
-    public void setCodfor(int codfor) {
-        this.codfor = codfor;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTipfor() {
-        return tipfor;
+    public String getTipoFornecedor() {
+        return tipoFornecedor;
     }
 
-    public void setTipfor(String tipfor) {
-        this.tipfor = tipfor;
+    public void setTipoFornecedor(String tipoFornecedor) {
+        this.tipoFornecedor = tipoFornecedor;
     }
 
-    public String getNomraz() {
-        return nomraz;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setNomraz(String nomraz) {
-        this.nomraz = nomraz;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
-    public String getApefan() {
-        return apefan;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
 
-    public void setApefan(String apefan) {
-        this.apefan = apefan;
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public String getRgie() {

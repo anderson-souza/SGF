@@ -1,15 +1,14 @@
 package telas;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TelaSistema extends JFrame implements ActionListener {
 
     //gerencia a parte interna da janela, gerenciando as JFrame dentro dele.
-    public static JDesktopPane jdp = new JDesktopPane() {
-        private Image imagem = new ImageIcon(getClass().getResource("/imagens/background.png")).getImage();
+    public static JDesktopPane jDesktopPane = new JDesktopPane() {
+        /*private Image imagem = new ImageIcon(getClass().getResource("imagens/background.jpg")).getImage();
 
         @Override
         public void paintComponent(Graphics g) {
@@ -18,9 +17,9 @@ public class TelaSistema extends JFrame implements ActionListener {
             int x = (int) (dimension.getWidth() - imagem.getWidth(this)) / 2;
             int y = (int) (dimension.getHeight() - imagem.getHeight(this)) / 2;
             g.drawImage(imagem, x, y, imagem.getWidth(this), imagem.getHeight(this), this);
-        }
+        }*/
     };
-    public JMenuBar jmb = new JMenuBar();
+    public JMenuBar jMenuBar = new JMenuBar();
     public JMenu jmCadastros = new JMenu("Cadastros");
     public JMenu jmMovimentos = new JMenu("Movimentos");
     public JMenu jmRelatorios = new JMenu("Relatórios");
@@ -39,10 +38,10 @@ public class TelaSistema extends JFrame implements ActionListener {
     public TelaSistema() {
         setTitle("Sistema Gerenciador de Floricultura - 2014");
         setExtendedState(MAXIMIZED_BOTH);
-        setJMenuBar(jmb);
-        jmb.add(jmCadastros);
-        jmb.add(jmMovimentos);
-        jmb.add(jmRelatorios);
+        setJMenuBar(jMenuBar);
+        jMenuBar.add(jmCadastros);
+        jMenuBar.add(jmMovimentos);
+        jMenuBar.add(jmRelatorios);
         jmCadastros.add(jmiPais);
         jmCadastros.add(jmiEstado);
         jmCadastros.add(jmiCidade);
@@ -66,13 +65,13 @@ public class TelaSistema extends JFrame implements ActionListener {
         jmiMoveis.addActionListener(this);
         jmiFornecedor.addActionListener(this);
         jmiCompra.addActionListener(this);
-        getContentPane().add(jdp);
+        getContentPane().add(jDesktopPane);
         //Sempre lembrar do setVisible(true) senão a tela não será apresentada 
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    @Override
+
     public void actionPerformed(ActionEvent ae) {
 
         if (ae.getSource() == jmiPais) {

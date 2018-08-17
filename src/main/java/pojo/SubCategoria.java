@@ -5,33 +5,33 @@ package pojo;
  */
 public class SubCategoria {
 
-    private int codsct;
-    private String dessct;
+    private int id;
+    private String descricao;
     private Categoria categoria = new Categoria();
-    private String sitsct;
+    private String situacao;
 
-    public String getSitsct() {
-        return sitsct;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitsct(String sitsct) {
-        this.sitsct = sitsct;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodsct() {
-        return codsct;
+    public int getId() {
+        return id;
     }
 
-    public void setCodsct(int codsct) {
-        this.codsct = codsct;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDessct() {
-        return dessct;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDessct(String dessct) {
-        this.dessct = dessct;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Categoria getCategoria() {

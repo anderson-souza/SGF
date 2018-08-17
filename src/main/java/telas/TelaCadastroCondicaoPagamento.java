@@ -42,35 +42,35 @@ public class TelaCadastroCondicaoPagamento extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        condicaoPagamento.setCodpgt((Integer) campoCodigo.getValor());
-        condicaoPagamento.setDespgt((String) campoDescricao.getValor());
-        condicaoPagamento.setNumpar((Integer) campoParcelas.getValor());
-        condicaoPagamento.setPrapar((Integer) campoPrazo.getValor());
-        condicaoPagamento.setDiacar((Integer) campoCarencia.getValor());
-        condicaoPagamento.setSitpgt((String) campoSituacao.getValor());
+        condicaoPagamento.setId((Integer) campoCodigo.getValor());
+        condicaoPagamento.setDescricao((String) campoDescricao.getValor());
+        condicaoPagamento.setNumeroParcelas((Integer) campoParcelas.getValor());
+        condicaoPagamento.setPrazoParcelas((Integer) campoPrazo.getValor());
+        condicaoPagamento.setDiasCarencia((Integer) campoCarencia.getValor());
+        condicaoPagamento.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(condicaoPagamento.getCodpgt());
-        campoDescricao.setValor(condicaoPagamento.getDespgt());
-        campoParcelas.setValor(condicaoPagamento.getNumpar());
-        campoPrazo.setValor(condicaoPagamento.getPrapar());
-        campoCarencia.setValor(condicaoPagamento.getDiacar());
-        campoSituacao.setValor(condicaoPagamento.getSitpgt());
+        campoCodigo.setValor(condicaoPagamento.getId());
+        campoDescricao.setValor(condicaoPagamento.getDescricao());
+        campoParcelas.setValor(condicaoPagamento.getNumeroParcelas());
+        campoPrazo.setValor(condicaoPagamento.getPrazoParcelas());
+        campoCarencia.setValor(condicaoPagamento.getDiasCarencia());
+        campoSituacao.setValor(condicaoPagamento.getSituacao());
     }
 
     @Override
@@ -104,7 +104,7 @@ public class TelaCadastroCondicaoPagamento extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        condicaoPagamento.setCodpgt(pk);
+        condicaoPagamento.setId(pk);
         condicaoPagamentoDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

@@ -21,8 +21,8 @@ public class ItemCompraDao extends DaoPadrao {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLINCLUIR);
             itemCompra.setCoditc(pegaGenerator("GITEMCOMPRA"));
             ps.setInt(1, itemCompra.getCoditc());
-            ps.setInt(2, itemCompra.getCodcpr().getCodcpr());
-            ps.setInt(3, itemCompra.getCodpro().getCodpro());
+            ps.setInt(2, itemCompra.getCodcpr().getId());
+            ps.setInt(3, itemCompra.getCodpro().getId());
             ps.setInt(4, itemCompra.getQtdcpr());
             ps.setBigDecimal(5, itemCompra.getVlruni());
             ps.setBigDecimal(6, itemCompra.getVlrdes());
@@ -40,9 +40,9 @@ public class ItemCompraDao extends DaoPadrao {
             String SQLALTERAR = "UPDATE ITEMCOMPRA SET CODCPR = ?, CODPRO = ?, CODMOV = ?, QTDCPR = ?, VLRUNI = ?,"
                     + "VLRDES = ? WHERE CODITC = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLALTERAR);
-            ps.setInt(1, itemCompra.getCodcpr().getCodcpr());
-            ps.setInt(2, itemCompra.getCodpro().getCodpro());
-            ps.setInt(3, itemCompra.getCodmov().getCodmov());
+            ps.setInt(1, itemCompra.getCodcpr().getId());
+            ps.setInt(2, itemCompra.getCodpro().getId());
+            ps.setInt(3, itemCompra.getCodmov().getId());
             ps.setInt(4, itemCompra.getQtdcpr());
             ps.setBigDecimal(5, itemCompra.getVlruni());
             ps.setBigDecimal(6, itemCompra.getVlrdes());
@@ -79,9 +79,9 @@ public class ItemCompraDao extends DaoPadrao {
             if (rs.next()) {
                 System.out.println("Consultei essa parada");
                 itemCompra.setCoditc(rs.getInt(1));
-                itemCompra.getCodcpr().setCodcpr(rs.getInt(2));
-                itemCompra.getCodpro().setCodpro(rs.getInt(3));
-                itemCompra.getCodpro().setDespro(rs.getString(4));
+                itemCompra.getCodcpr().setId(rs.getInt(2));
+                itemCompra.getCodpro().setId(rs.getInt(3));
+                itemCompra.getCodpro().setDescricao(rs.getString(4));
                 itemCompra.setQtdcpr((rs.getInt(5)));
                 itemCompra.setVlruni(rs.getBigDecimal(6));
                 itemCompra.setVlrdes((rs.getBigDecimal(7)));

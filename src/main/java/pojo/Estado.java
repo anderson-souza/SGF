@@ -5,27 +5,27 @@ package pojo;
  */
 public class Estado {
 
-    private int codest;
+    private int id;
     private Pais pais = new Pais();
-    private String nomest;
-    private String sigest;
-    private String obsest;
-    private String sitest;
+    private String nome;
+    private String sigla;
+    private String observacao;
+    private String situacao;
 
-    public String getSitest() {
-        return sitest;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitest(String sitest) {
-        this.sitest = sitest;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodest() {
-        return codest;
+    public int getId() {
+        return id;
     }
 
-    public void setCodest(int codest) {
-        this.codest = codest;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Pais getPais() {
@@ -36,28 +36,28 @@ public class Estado {
         this.pais = pais;
     }
 
-    public String getNomest() {
-        return nomest;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomest(String nomest) {
-        this.nomest = nomest;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSigest() {
-        return sigest;
+    public String getSigla() {
+        return sigla;
     }
 
-    public void setSigest(String sigest) {
-        this.sigest = sigest;
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
     }
 
-    public String getObsest() {
-        return obsest;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setObsest(String obsest) {
-        this.obsest = obsest;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
 }

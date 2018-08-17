@@ -23,13 +23,13 @@ public class EstadoDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO ESTADO VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            estado.setCodest(pegaGenerator("GESTADO"));
-            ps.setInt(1, estado.getCodest());
-            ps.setString(2, estado.getNomest());
-            ps.setString(3, estado.getSigest());
+            estado.setId(pegaGenerator("GESTADO"));
+            ps.setInt(1, estado.getId());
+            ps.setString(2, estado.getNome());
+            ps.setString(3, estado.getSigla());
             ps.setInt(4, estado.getPais().getId());
-            ps.setString(5, estado.getObsest());
-            ps.setString(6, estado.getSitest());
+            ps.setString(5, estado.getObservacao());
+            ps.setString(6, estado.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -43,12 +43,12 @@ public class EstadoDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE ESTADO SET NOMEST = ?, SIGEST = ?, CODPAI = ?, OBSEST = ?, SITEST = ? WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, estado.getNomest());
-            ps.setString(2, estado.getSigest());
+            ps.setString(1, estado.getNome());
+            ps.setString(2, estado.getSigla());
             ps.setInt(3, estado.getPais().getId());
-            ps.setString(4, estado.getObsest());
-            ps.setString(5, estado.getSitest());
-            ps.setInt(6, estado.getCodest());
+            ps.setString(4, estado.getObservacao());
+            ps.setString(5, estado.getSituacao());
+            ps.setInt(6, estado.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -62,7 +62,7 @@ public class EstadoDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM ESTADO WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, estado.getCodest());
+            ps.setInt(1, estado.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -76,15 +76,15 @@ public class EstadoDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM ESTADO WHERE CODEST = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, estado.getCodest());
+            ps.setInt(1, estado.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                estado.setCodest(rs.getInt(1));
-                estado.setNomest(rs.getString(2));
-                estado.setSigest(rs.getString(3));
+                estado.setId(rs.getInt(1));
+                estado.setNome(rs.getString(2));
+                estado.setSigla(rs.getString(3));
                 estado.getPais().setId(rs.getInt(4));
-                estado.setObsest(rs.getString(5));
-                estado.setSitest(rs.getString(6));
+                estado.setObservacao(rs.getString(5));
+                estado.setSituacao(rs.getString(6));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Estado não encontrado.");
@@ -101,12 +101,12 @@ public class EstadoDao extends DaoPadrao {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
             //ps.setInt(1, estado.getId());
-            ps.setString(1, estado.getNomest());
-            ps.setString(2, estado.getSigest());
+            ps.setString(1, estado.getNome());
+            ps.setString(2, estado.getSigla());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if ((rs.getString("NOMEST").equals(estado.getNomest()) || rs.getString("SIGEST").equals(estado.getSigest()))
-                        && rs.getInt("CODEST") != estado.getCodest()) {
+                if ((rs.getString("NOMEST").equals(estado.getNome()) || rs.getString("SIGEST").equals(estado.getSigla()))
+                        && rs.getInt("CODEST") != estado.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Estado já cadastrado com este Nome ou Sigla");
                     return false;

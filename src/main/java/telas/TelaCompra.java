@@ -76,8 +76,8 @@ public class TelaCompra extends TelaCadastro {
 
     public TelaCompra() {
         super("Cadastro de Compra");
-        compra.setCodfor(fornecedor);
-        compra.setCodpgt(condicaoPagamento);
+        compra.setFornecedor(fornecedor);
+        compra.setCondicaoPagamento(condicaoPagamento);
         adicionaCampo(1, 1, 1, 1, campoCodigo);
         adicionaCampo(2, 1, 1, 1, campoData);
         adicionaCampo(3, 1, 1, 2, campoFornecedor);
@@ -131,15 +131,15 @@ public class TelaCompra extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
@@ -229,14 +229,14 @@ public class TelaCompra extends TelaCadastro {
 
     @Override
     public void setPersistencia() {
-        fornecedor.setCodfor((Integer) campoFornecedor.getValor());
-        condicaoPagamento.setCodpgt((Integer) campoCondicaoPagamento.getValor());
-        compra.setStacpr(((String) campoStatus.getValor()));
-        compra.setSitcpr(((String) campoSituacao.getValor()));
-        compra.setDatcpr((Date) campoData.getValorDate());
-        compra.setVlrcpr((BigDecimal) campoValorCompra.getValor());
-        compra.setVlrdes((BigDecimal) campoDescontoCompra.getValor());
-        compra.setVlrfrt((BigDecimal) campoValorFrete.getValor());
+        fornecedor.setId((Integer) campoFornecedor.getValor());
+        condicaoPagamento.setId((Integer) campoCondicaoPagamento.getValor());
+        compra.setSituacao(((String) campoStatus.getValor()));
+        compra.setStatus(((String) campoSituacao.getValor()));
+        compra.setDataCompra((Date) campoData.getValorDate());
+        compra.setValorCompra((BigDecimal) campoValorCompra.getValor());
+        compra.setValorDesconto((BigDecimal) campoDescontoCompra.getValor());
+        compra.setValorFrete((BigDecimal) campoValorFrete.getValor());
     }
 
     @Override
@@ -254,14 +254,14 @@ public class TelaCompra extends TelaCadastro {
         }
         compra.setItens(itensCompra);
         boolean retorno = (super.incluirBD() && CompraDao.inserir());
-        campoCodigo.setValor(compra.getCodcpr());
+        campoCodigo.setValor(compra.getId());
         return retorno;
     }
 
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        compra.setCodcpr(pk);
+        compra.setId(pk);
         CompraDao.consultar();
         temDadosNaTela = true;
         setGui();
@@ -270,15 +270,15 @@ public class TelaCompra extends TelaCadastro {
     }
 
     public void setGui() {
-        campoCodigo.setValor(compra.getCodcpr());
-        campoData.setValor(compra.getDatcpr());
-        campoFornecedor.setValor(compra.getCodfor().getCodfor());
-        campoValorCompra.setValor(compra.getVlrcpr());
-        campoDescontoCompra.setValor(compra.getVlrdes());
-        campoValorLiquidoCompra.setValor(compra.getVlrcpr().subtract(compra.getVlrdes()));
-        campoValorFrete.setValor(compra.getVlrfrt());
-        campoSituacao.setValor(compra.getSitcpr());
-        campoStatus.setValor(compra.getStacpr());
+        campoCodigo.setValor(compra.getId());
+        campoData.setValor(compra.getDataCompra());
+        campoFornecedor.setValor(compra.getFornecedor().getId());
+        campoValorCompra.setValor(compra.getValorCompra());
+        campoDescontoCompra.setValor(compra.getValorDesconto());
+        campoValorLiquidoCompra.setValor(compra.getValorCompra().subtract(compra.getValorDesconto()));
+        campoValorFrete.setValor(compra.getValorFrete());
+        campoSituacao.setValor(compra.getStatus());
+        campoStatus.setValor(compra.getSituacao());
         tm.setDados(compra.getItens());
         System.out.println("Cheguei aqui yo");
     }
@@ -332,9 +332,9 @@ public class TelaCompra extends TelaCadastro {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    produto.setCodpro((Integer) campoProdutoItem.getValor());
+                    produto.setId((Integer) campoProdutoItem.getValor());
                     produtoDao.consultar();
-                    campoValorUnitarioItem.setValor(produto.getPreven());
+                    campoValorUnitarioItem.setValor(produto.getPrecoVenda());
                     calcularItem();
                 }
             }
@@ -344,14 +344,14 @@ public class TelaCompra extends TelaCadastro {
             public void valueChanged(ListSelectionEvent e) {
                 if (tabela.getSelectedRow() >= 0) {
                     itemCompra = tm.getItemCompra(tabela.getSelectedRow());
-                    if (itemCompra.getCodpro().getCodpro() == 0) {  //É uma nova linha, dados devem ficar em branco.
+                    if (itemCompra.getCodpro().getId() == 0) {  //É uma nova linha, dados devem ficar em branco.
                         campoProdutoItem.limpar();
                         campoValorUnitarioItem.setValor(BigDecimal.ZERO);
                         campoQuantidadeItem.setValor(1);
                         campoDescontoItem.setValor(BigDecimal.ZERO);
                         campoValorLiquidoItem.setValor(BigDecimal.ZERO);
                     } else {
-                        campoProdutoItem.setValor(itemCompra.getCodpro().getCodpro());
+                        campoProdutoItem.setValor(itemCompra.getCodpro().getId());
                         campoValorUnitarioItem.setValor(itemCompra.getVlruni());
                         campoQuantidadeItem.setValor(itemCompra.getQtdcpr());
                         campoDescontoItem.setValor(itemCompra.getVlrdes());
@@ -381,8 +381,8 @@ public class TelaCompra extends TelaCadastro {
                     return;
                 }
                 itemCompra = tm.getItemCompra(tabela.getSelectedRow());
-                itemCompra.getCodpro().setCodpro((Integer) campoProdutoItem.getValor());
-                itemCompra.getCodpro().setDespro((String) campoProdutoItem.getValorTexto());
+                itemCompra.getCodpro().setId((Integer) campoProdutoItem.getValor());
+                itemCompra.getCodpro().setDescricao((String) campoProdutoItem.getValorTexto());
                 itemCompra.setVlruni((BigDecimal) campoValorUnitarioItem.getValor());
                 itemCompra.setQtdcpr((Integer) campoQuantidadeItem.getValor());
                 itemCompra.setVlrdes((BigDecimal) campoDescontoItem.getValor());

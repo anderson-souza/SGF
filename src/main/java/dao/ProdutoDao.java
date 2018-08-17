@@ -27,15 +27,15 @@ public class ProdutoDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO PRODUTO VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            produto.setCodpro(pegaGenerator("GPRODUTO"));
-            ps.setInt(1, produto.getCodpro());
-            ps.setString(2, produto.getDespro());
-            ps.setInt(3, produto.getQtdpro());
-            ps.setBigDecimal(4, produto.getPrecus());
-            ps.setBigDecimal(5, produto.getPreven());
+            produto.setId(pegaGenerator("GPRODUTO"));
+            ps.setInt(1, produto.getId());
+            ps.setString(2, produto.getDescricao());
+            ps.setInt(3, produto.getQuantidade());
+            ps.setBigDecimal(4, produto.getPrecoCusto());
+            ps.setBigDecimal(5, produto.getPrecoVenda());
             ps.setInt(6, produto.getCor().getCodCor());
-            ps.setInt(7, produto.getSubCategoria().getCodsct());
-            ps.setString(8, produto.getSitpro());
+            ps.setInt(7, produto.getSubCategoria().getId());
+            ps.setString(8, produto.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -49,14 +49,14 @@ public class ProdutoDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE PRODUTO SET DESPRO = ?, QTDPRO = ?, PRECUS = ?, PREVEN = ?, CODCOR = ?, CODSCT = ?, SITPRO = ? WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, produto.getDespro());
-            ps.setInt(2, produto.getQtdpro());
-            ps.setBigDecimal(3, produto.getPrecus());
-            ps.setBigDecimal(4, produto.getPreven());
+            ps.setString(1, produto.getDescricao());
+            ps.setInt(2, produto.getQuantidade());
+            ps.setBigDecimal(3, produto.getPrecoCusto());
+            ps.setBigDecimal(4, produto.getPrecoVenda());
             ps.setInt(5, produto.getCor().getCodCor());
-            ps.setInt(6, produto.getSubCategoria().getCodsct());
-            ps.setString(7, produto.getSitpro());
-            ps.setInt(8, produto.getCodpro());
+            ps.setInt(6, produto.getSubCategoria().getId());
+            ps.setString(7, produto.getSituacao());
+            ps.setInt(8, produto.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -70,7 +70,7 @@ public class ProdutoDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM PRODUTO WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, produto.getCodpro());
+            ps.setInt(1, produto.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -84,17 +84,17 @@ public class ProdutoDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM PRODUTO WHERE CODPRO = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, produto.getCodpro());
+            ps.setInt(1, produto.getId());
             ResultSet rs = ps.executeQuery(); //SELECT CODPRO, DESPRO, CODCOR, CODSCT FROM PRODUTO
             if (rs.next()) {
-                produto.setCodpro(rs.getInt(1));
-                produto.setDespro(rs.getString(2));
-                produto.setQtdpro(rs.getInt(3));
-                produto.setPrecus(rs.getBigDecimal(4));
-                produto.setPreven(rs.getBigDecimal(5));
-                produto.getCor().setCodcor(rs.getInt(6));
-                produto.getSubCategoria().setCodsct(rs.getInt(7));
-                produto.setSitpro(rs.getString(8));
+                produto.setId(rs.getInt(1));
+                produto.setDescricao(rs.getString(2));
+                produto.setQuantidade(rs.getInt(3));
+                produto.setPrecoCusto(rs.getBigDecimal(4));
+                produto.setPrecoVenda(rs.getBigDecimal(5));
+                produto.getCor().setId(rs.getInt(6));
+                produto.getSubCategoria().setId(rs.getInt(7));
+                produto.setSituacao(rs.getString(8));
 
                 return true;
             } else {
@@ -111,10 +111,10 @@ public class ProdutoDao extends DaoPadrao {
     public boolean duplicidade() {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
-            ps.setString(1, produto.getDespro());
+            ps.setString(1, produto.getDescricao());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getString("DESPRO").equals(produto.getDespro()) && rs.getInt("CODPRO") != produto.getCodpro()) {
+                if (rs.getString("DESPRO").equals(produto.getDescricao()) && rs.getInt("CODPRO") != produto.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Produto já cadastrado com este Nome");
                     return false;

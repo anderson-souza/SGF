@@ -25,8 +25,8 @@ public class PaisDao extends DaoPadrao {
             pais.setId(pegaGenerator("GPAIS"));
             ps.setInt(1, pais.getId());
             ps.setString(2, pais.getNome());
-            ps.setString(3, pais.getObs());
-            ps.setString(4, pais.getSitpai());
+            ps.setString(3, pais.getObservacao());
+            ps.setString(4, pais.getSituacao());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -41,8 +41,8 @@ public class PaisDao extends DaoPadrao {
             String UPDATESQL = "UPDATE PAIS SET NOMPAI = ?, OBSPAI = ?, SITPAI = ? WHERE CODPAI = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, pais.getNome());
-            ps.setString(2, pais.getObs());
-            ps.setString(3, pais.getSitpai());
+            ps.setString(2, pais.getObservacao());
+            ps.setString(3, pais.getSituacao());
             ps.setInt(4, pais.getId());
             ps.executeUpdate();//
             return true;
@@ -76,8 +76,8 @@ public class PaisDao extends DaoPadrao {
             if (rs.next()) {
                 pais.setId(rs.getInt(1));
                 pais.setNome(rs.getString(2));
-                pais.setObs(rs.getString(3));
-                pais.setSitpai(rs.getString(4));
+                pais.setObservacao(rs.getString(3));
+                pais.setSituacao(rs.getString(4));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "País não encontrado");

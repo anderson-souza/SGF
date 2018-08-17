@@ -22,11 +22,11 @@ public class SubCategoriaDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO SUBCATEGORIA VALUES(?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            subCategoria.setCodsct(pegaGenerator("GSUBCATEGORIA"));
-            ps.setInt(1, subCategoria.getCodsct());
-            ps.setString(2, subCategoria.getDessct());
-            ps.setInt(3, subCategoria.getCategoria().getCodcat());
-            ps.setString(4, subCategoria.getSitsct());
+            subCategoria.setId(pegaGenerator("GSUBCATEGORIA"));
+            ps.setInt(1, subCategoria.getId());
+            ps.setString(2, subCategoria.getDescricao());
+            ps.setInt(3, subCategoria.getCategoria().getId());
+            ps.setString(4, subCategoria.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -40,10 +40,10 @@ public class SubCategoriaDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE SUBCATEGORIA SET DESSCT = ?, CODCAT = ?, SITCSCT = ? WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, subCategoria.getDessct());
-            ps.setInt(2, subCategoria.getCategoria().getCodcat());
-            ps.setString(3, subCategoria.getSitsct());
-            ps.setInt(4, subCategoria.getCodsct());
+            ps.setString(1, subCategoria.getDescricao());
+            ps.setInt(2, subCategoria.getCategoria().getId());
+            ps.setString(3, subCategoria.getSituacao());
+            ps.setInt(4, subCategoria.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -57,7 +57,7 @@ public class SubCategoriaDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM SUBCATEGORIA WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, subCategoria.getCodsct());
+            ps.setInt(1, subCategoria.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -71,13 +71,13 @@ public class SubCategoriaDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM SUBCATEGORIA WHERE CODSCT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, subCategoria.getCodsct());
+            ps.setInt(1, subCategoria.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                subCategoria.setCodsct(rs.getInt(1));
-                subCategoria.setDessct(rs.getString(2));
-                subCategoria.getCategoria().setCodcat(rs.getInt(3));
-                subCategoria.setSitsct(rs.getString(4));
+                subCategoria.setId(rs.getInt(1));
+                subCategoria.setDescricao(rs.getString(2));
+                subCategoria.getCategoria().setId(rs.getInt(3));
+                subCategoria.setSituacao(rs.getString(4));
 
                 return true;
             } else {
@@ -94,10 +94,10 @@ public class SubCategoriaDao extends DaoPadrao {
     public boolean duplicidade() {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
-            ps.setString(1, subCategoria.getDessct());
+            ps.setString(1, subCategoria.getDescricao());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getString("DESSCT").equals(subCategoria.getDessct()) && rs.getInt("CODSCT") != subCategoria.getCodsct()) {
+                if (rs.getString("DESSCT").equals(subCategoria.getDescricao()) && rs.getInt("CODSCT") != subCategoria.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "SubCategoria já cadastrada com este Nome");
                     return false;

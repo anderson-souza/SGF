@@ -28,19 +28,19 @@ public class CompraDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO COMPRAS VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            Compra.setCodcpr(pegaGenerator("GCOMPRA"));
-            ps.setInt(1, Compra.getCodcpr());
-            ps.setInt(2, Compra.getCodfor().getCodfor());
-            System.out.println(Compra.getCodfor().getCodfor());
-            ps.setInt(3, Compra.getCodpgt().getCodpgt());
-            System.out.println(Compra.getCodpgt().getCodpgt());
-            ps.setDate(4, MetodosGenericos.dataParaBanco(Compra.getDatcpr()));
-            ps.setString(5, Compra.getNumdoc());
-            ps.setBigDecimal(6, Compra.getVlrcpr());
-            ps.setBigDecimal(7, Compra.getVlrfrt());
-            ps.setBigDecimal(8, Compra.getVlrdes());
-            ps.setString(9, Compra.getStacpr());
-            ps.setString(10, Compra.getSitcpr());
+            Compra.setId(pegaGenerator("GCOMPRA"));
+            ps.setInt(1, Compra.getId());
+            ps.setInt(2, Compra.getFornecedor().getId());
+            System.out.println(Compra.getFornecedor().getId());
+            ps.setInt(3, Compra.getCondicaoPagamento().getId());
+            System.out.println(Compra.getCondicaoPagamento().getId());
+            ps.setDate(4, MetodosGenericos.dataParaBanco(Compra.getDataCompra()));
+            ps.setString(5, Compra.getNumeroDocumento());
+            ps.setBigDecimal(6, Compra.getValorCompra());
+            ps.setBigDecimal(7, Compra.getValorFrete());
+            ps.setBigDecimal(8, Compra.getValorDesconto());
+            ps.setString(9, Compra.getSituacao());
+            ps.setString(10, Compra.getStatus());
             ps.executeUpdate();
             List<ItemCompra> itensCompra = Compra.getItens();
             ItemCompra itemCompra;
@@ -65,16 +65,16 @@ public class CompraDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE COMPRAS SET STACPR = ?, SITCPR = ? WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, Compra.getStacpr());
-            ps.setString(2, Compra.getSitcpr());
-            ps.setInt(3, Compra.getCodcpr());
+            ps.setString(1, Compra.getSituacao());
+            ps.setString(2, Compra.getStatus());
+            ps.setInt(3, Compra.getId());
             ps.executeUpdate();
             List<ItemCompra> itensCompra = Compra.getItens();
             ItemCompra itemCompra;
             ItemCompraDao itemCompraDao = new ItemCompraDao();
             /*for (int i = 0; i < itensCompra.size(); i++) {
              itemCompra = itensCompra.get(i);
-             itemCompra.setCodcpr(Compra);
+             itemCompra.setId(Compra);
              itemCompraDao.setitemCompra(itemCompra);
              itemCompraDao.excluir();
              }*/
@@ -100,7 +100,7 @@ public class CompraDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM COMPRAS WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, Compra.getCodcpr());
+            ps.setInt(1, Compra.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -114,19 +114,19 @@ public class CompraDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM COMPRAS WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, Compra.getCodcpr());
+            ps.setInt(1, Compra.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Compra.setCodcpr(rs.getInt(1));
-                Compra.getCodfor().setCodfor(rs.getInt(2));
-                Compra.getCodpgt().setCodpgt(rs.getInt(3));
-                Compra.setDatcpr(rs.getDate(4));
-                Compra.setNumdoc(rs.getString(5));
-                Compra.setVlrcpr(rs.getBigDecimal(6));
-                Compra.setVlrfrt(rs.getBigDecimal(7));
-                Compra.setVlrdes(rs.getBigDecimal(8));
-                Compra.setStacpr(rs.getString(9));
-                Compra.setSitcpr(rs.getString(10));
+                Compra.setId(rs.getInt(1));
+                Compra.getFornecedor().setId(rs.getInt(2));
+                Compra.getCondicaoPagamento().setId(rs.getInt(3));
+                Compra.setDataCompra(rs.getDate(4));
+                Compra.setNumeroDocumento(rs.getString(5));
+                Compra.setValorCompra(rs.getBigDecimal(6));
+                Compra.setValorFrete(rs.getBigDecimal(7));
+                Compra.setValorDesconto(rs.getBigDecimal(8));
+                Compra.setSituacao(rs.getString(9));
+                Compra.setStatus(rs.getString(10));
                 Compra.setItens(consultarItens());
                 return true;
             } else {
@@ -149,7 +149,7 @@ public class CompraDao extends DaoPadrao {
             ItemCompra itemCompra;
             String SQLCONSULTARITENS = "SELECT CODITC FROM ITEMCOMPRA WHERE CODCPR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(SQLCONSULTARITENS);
-            ps.setInt(1, Compra.getCodcpr());
+            ps.setInt(1, Compra.getId());
             ResultSet rs = ps.executeQuery();
             List<Integer> codigosItens = new ArrayList();
             while (rs.next()) {
@@ -160,7 +160,7 @@ public class CompraDao extends DaoPadrao {
                 itemCompra.setCoditc(codigosItens.get(i));
                 itemCompraDao.setitemCompra(itemCompra);
                 itemCompraDao.consultar();
-                produto.setCodpro(itemCompra.getCodpro().getCodpro());
+                produto.setId(itemCompra.getCodpro().getId());
                 produtoDao.consultar();
                 itensCompra.add(itemCompra);
             }

@@ -7,15 +7,15 @@ public class Pais {
 
     private int id;
     private String nome;
-    private String obs;
-    private String sitpai;
+    private String observacao;
+    private String situacao;
 
-    public String getSitpai() {
-        return sitpai;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitpai(String sitpai) {
-        this.sitpai = sitpai;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class Pais {
         this.nome = nome;
     }
 
-    public String getObs() {
-        return obs;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setObs(String obs) {
-        this.obs = obs;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
 }

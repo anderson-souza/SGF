@@ -51,10 +51,10 @@ public class TableModelCompra extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
         switch (col) {
             case 0:
-                dados.get(row).getCodpro().setCodpro((Integer) value);
+                dados.get(row).getCodpro().setId((Integer) value);
                 break;
             case 1:
-                dados.get(row).getCodpro().setCodpro((Integer) value);
+                dados.get(row).getCodpro().setId((Integer) value);
                 produtoDao.setProduto(dados.get(row).getCodpro());
                 produtoDao.consultar();
                 break;
@@ -79,9 +79,9 @@ public class TableModelCompra extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         switch (col) {
             case 0:
-                return dados.get(row).getCodpro().getCodpro();
+                return dados.get(row).getCodpro().getId();
             case 1:
-                return dados.get(row).getCodpro().getDespro();
+                return dados.get(row).getCodpro().getDescricao();
             case 2:
                 return dados.get(row).getVlruni();
             case 3:
@@ -91,7 +91,7 @@ public class TableModelCompra extends AbstractTableModel {
             case 5:
                 BigDecimal qtde = new BigDecimal(dados.get(row).getQtdcpr());
                 return dados.get(row).getVlruni().multiply(qtde).subtract(dados.get(row).getVlrdes());
-            //return dados.get(row).getVlrdes();
+            //return dados.get(row).getValorDesconto();
             default:
                 JOptionPane.showMessageDialog(null, "Não existe tratamento para a coluna " + col + " na tabela de Itens de Compra. (get)*Vulgo tetraplegico");
                 return "";

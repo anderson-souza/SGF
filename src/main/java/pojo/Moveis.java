@@ -7,52 +7,52 @@ import java.math.BigDecimal;
  */
 public class Moveis {
 
-    private int codmov;
-    private String desmov;
-    private int qtdmov;
-    private BigDecimal vlralu;
+    private int id;
+    private String descricao;
+    private int quantidade;
+    private BigDecimal valorAluguel;
     private Cor cor = new Cor();
     private SubCategoria subCategoria = new SubCategoria();
-    private String sitmov;
+    private String situacao;
 
-    public String getSitmov() {
-        return sitmov;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitmov(String sitmov) {
-        this.sitmov = sitmov;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodmov() {
-        return codmov;
+    public int getId() {
+        return id;
     }
 
-    public void setCodmov(int codmov) {
-        this.codmov = codmov;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDesmov() {
-        return desmov;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDesmov(String desmov) {
-        this.desmov = desmov;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getQtdmov() {
-        return qtdmov;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQtdmov(int qtdmov) {
-        this.qtdmov = qtdmov;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public BigDecimal getVlralu() {
-        return vlralu;
+    public BigDecimal getValorAluguel() {
+        return valorAluguel;
     }
 
-    public void setVlralu(BigDecimal vlralu) {
-        this.vlralu = vlralu;
+    public void setValorAluguel(BigDecimal valorAluguel) {
+        this.valorAluguel = valorAluguel;
     }
 
     public Cor getCor() {

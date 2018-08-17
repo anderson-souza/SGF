@@ -51,24 +51,24 @@ public class TelaCadastroFornecedor extends TelaCadastro implements FocusListene
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        fornecedor.setCodfor((Integer) campoCodigo.getValor());
-        fornecedor.setTipfor((String) campoTipo.getValor());
-        fornecedor.setNomraz((String) campoNome.getValor());
-        fornecedor.setApefan((String) campoApelido.getValor());
+        fornecedor.setId((Integer) campoCodigo.getValor());
+        fornecedor.setTipoFornecedor((String) campoTipo.getValor());
+        fornecedor.setRazaoSocial((String) campoNome.getValor());
+        fornecedor.setNomeFantasia((String) campoApelido.getValor());
         fornecedor.setRgie((String) campoRG.getValor());
         //cidade.setUltimaAlteracao(new Date());
         fornecedor.setDatnas((Date) campoDtNas.getValorDate());
@@ -83,15 +83,15 @@ public class TelaCadastroFornecedor extends TelaCadastro implements FocusListene
         fornecedor.setCelfor((String) campoCelular.getValor());
         fornecedor.setEmailfor((String) campoEmail.getValor());
         fornecedor.setObsfor((String) campoObservacao.getValor());
-        fornecedor.getCidade().setCodcid((Integer) campoCidade.getValor());
+        fornecedor.getCidade().setId((Integer) campoCidade.getValor());
         fornecedor.setSitfor((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(fornecedor.getCodfor());
-        campoTipo.setValor(fornecedor.getTipfor());
-        campoNome.setValor(fornecedor.getNomraz());
-        campoApelido.setValor(fornecedor.getApefan());
+        campoCodigo.setValor(fornecedor.getId());
+        campoTipo.setValor(fornecedor.getTipoFornecedor());
+        campoNome.setValor(fornecedor.getRazaoSocial());
+        campoApelido.setValor(fornecedor.getNomeFantasia());
         campoRG.setValor(fornecedor.getRgie());
         campoDtNas.setValor(fornecedor.getDatnas());
         campoCpf.setValor(fornecedor.getCpfcnpj());
@@ -101,7 +101,7 @@ public class TelaCadastroFornecedor extends TelaCadastro implements FocusListene
         campoCelular.setValor(fornecedor.getCelfor());
         campoEmail.setValor(fornecedor.getEmailfor());
         campoObservacao.setValor(fornecedor.getObsfor());
-        campoCidade.setValor(fornecedor.getCidade().getCodcid());
+        campoCidade.setValor(fornecedor.getCidade().getId());
         campoCnpj.setValor(fornecedor.getCpfcnpj());
         campoSituacao.setValor(fornecedor.getSitfor());
     }
@@ -162,7 +162,7 @@ public class TelaCadastroFornecedor extends TelaCadastro implements FocusListene
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        fornecedor.setCodfor(pk);
+        fornecedor.setId(pk);
         fornecedorDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

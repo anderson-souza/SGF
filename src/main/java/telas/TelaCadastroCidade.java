@@ -38,33 +38,33 @@ public class TelaCadastroCidade extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        cidade.setCodcid((Integer) campoCodigo.getValor());
+        cidade.setId((Integer) campoCodigo.getValor());
         cidade.setNomCid((String) campoNome.getValor());
-        cidade.setObscid((String) campoObservacao.getValor());
-        cidade.getEstado().setCodest((Integer) campoEstado.getValor());
-        cidade.setSitcid((String) campoSituacao.getValor());
+        cidade.setObservacao((String) campoObservacao.getValor());
+        cidade.getEstado().setId((Integer) campoEstado.getValor());
+        cidade.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(cidade.getCodcid());
+        campoCodigo.setValor(cidade.getId());
         campoNome.setValor(cidade.getNomCid());
-        campoObservacao.setValor(cidade.getObscid());
-        campoEstado.setValor(cidade.getEstado().getCodest());
-        campoSituacao.setValor(cidade.getSitcid());
+        campoObservacao.setValor(cidade.getObservacao());
+        campoEstado.setValor(cidade.getEstado().getId());
+        campoSituacao.setValor(cidade.getSituacao());
     }
 
     @Override
@@ -98,7 +98,7 @@ public class TelaCadastroCidade extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        cidade.setCodcid(pk);
+        cidade.setId(pk);
         cidadeDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

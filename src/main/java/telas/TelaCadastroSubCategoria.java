@@ -38,31 +38,31 @@ public class TelaCadastroSubCategoria extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        subCategoria.setCodsct((Integer) campoCodigo.getValor());
-        subCategoria.setDessct((String) campoNome.getValor());
-        subCategoria.getCategoria().setCodcat((Integer) campoCategoria.getValor());
-        subCategoria.setSitsct((String) campoSituacao.getValor());
+        subCategoria.setId((Integer) campoCodigo.getValor());
+        subCategoria.setDescricao((String) campoNome.getValor());
+        subCategoria.getCategoria().setId((Integer) campoCategoria.getValor());
+        subCategoria.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(subCategoria.getCodsct());
-        campoNome.setValor(subCategoria.getDessct());
-        campoCategoria.setValor(subCategoria.getCategoria().getCodcat());
-        campoSituacao.setValor(subCategoria.getSitsct());
+        campoCodigo.setValor(subCategoria.getId());
+        campoNome.setValor(subCategoria.getDescricao());
+        campoCategoria.setValor(subCategoria.getCategoria().getId());
+        campoSituacao.setValor(subCategoria.getSituacao());
     }
 
     @Override
@@ -98,7 +98,7 @@ public class TelaCadastroSubCategoria extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        subCategoria.setCodsct(pk);
+        subCategoria.setId(pk);
         subCategoriaDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

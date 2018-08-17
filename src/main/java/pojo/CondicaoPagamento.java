@@ -5,59 +5,59 @@ package pojo;
  */
 public class CondicaoPagamento {
 
-    private int codpgt;
-    private String despgt;
-    private int numpar;
-    private int prapar;
-    private int diacar;
-    private String sitpgt;
+    private int id;
+    private String descricao;
+    private int numeroParcelas;
+    private int prazoParcelas;
+    private int diasCarencia;
+    private String situacao;
 
-    public String getSitpgt() {
-        return sitpgt;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitpgt(String sitpgt) {
-        this.sitpgt = sitpgt;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodpgt() {
-        return codpgt;
+    public int getId() {
+        return id;
     }
 
-    public void setCodpgt(int codpgt) {
-        this.codpgt = codpgt;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDespgt() {
-        return despgt;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDespgt(String despgt) {
-        this.despgt = despgt;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getNumpar() {
-        return numpar;
+    public int getNumeroParcelas() {
+        return numeroParcelas;
     }
 
-    public void setNumpar(int numpar) {
-        this.numpar = numpar;
+    public void setNumeroParcelas(int numeroParcelas) {
+        this.numeroParcelas = numeroParcelas;
     }
 
-    public int getPrapar() {
-        return prapar;
+    public int getPrazoParcelas() {
+        return prazoParcelas;
     }
 
-    public void setPrapar(int prapar) {
-        this.prapar = prapar;
+    public void setPrazoParcelas(int prazoParcelas) {
+        this.prazoParcelas = prazoParcelas;
     }
 
-    public int getDiacar() {
-        return diacar;
+    public int getDiasCarencia() {
+        return diasCarencia;
     }
 
-    public void setDiacar(int diacar) {
-        this.diacar = diacar;
+    public void setDiasCarencia(int diasCarencia) {
+        this.diasCarencia = diasCarencia;
     }
 
 }

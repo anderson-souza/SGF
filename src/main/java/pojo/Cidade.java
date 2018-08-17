@@ -5,50 +5,50 @@ package pojo;
  */
 public class Cidade {
 
-    private int codcid;
-    private String nomcid;
+    private int id;
+    private String nome;
     private Estado estado = new Estado();
-    private String obscid;
-    private String sitcid;
+    private String observacao;
+    private String situacao;
 
-    public String getNomcid() {
-        return nomcid;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomcid(String nomcid) {
-        this.nomcid = nomcid;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSitcid() {
-        return sitcid;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitcid(String sitcid) {
-        this.sitcid = sitcid;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public String getObscid() {
-        return obscid;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setObscid(String obscid) {
-        this.obscid = obscid;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public int getCodcid() {
-        return codcid;
+    public int getId() {
+        return id;
     }
 
-    public void setCodcid(int codcid) {
-        this.codcid = codcid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomCid() {
-        return nomcid;
+        return nome;
     }
 
     public void setNomCid(String nomcid) {
-        this.nomcid = nomcid;
+        this.nome = nomcid;
     }
 
     public Estado getEstado() {

@@ -22,14 +22,14 @@ public class MoveisDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO MOVEIS VALUES(?,?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            moveis.setCodmov(pegaGenerator("GPRODUTO"));
-            ps.setInt(1, moveis.getCodmov());
-            ps.setString(2, moveis.getDesmov());
-            ps.setInt(3, moveis.getQtdmov());
-            ps.setBigDecimal(4, moveis.getVlralu());
+            moveis.setId(pegaGenerator("GPRODUTO"));
+            ps.setInt(1, moveis.getId());
+            ps.setString(2, moveis.getDescricao());
+            ps.setInt(3, moveis.getQuantidade());
+            ps.setBigDecimal(4, moveis.getValorAluguel());
             ps.setInt(5, moveis.getCor().getCodCor());
-            ps.setInt(6, moveis.getSubCategoria().getCodsct());
-            ps.setString(7, moveis.getSitmov());
+            ps.setInt(6, moveis.getSubCategoria().getId());
+            ps.setString(7, moveis.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -43,13 +43,13 @@ public class MoveisDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE MOVEIS SET DESMOV = ?, QTDMOV = ?, VLRALU = ?, CODCOR = ?, CODSCT = ?, SITMOV = ? WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, moveis.getDesmov());
-            ps.setInt(2, moveis.getQtdmov());
-            ps.setBigDecimal(3, moveis.getVlralu());
+            ps.setString(1, moveis.getDescricao());
+            ps.setInt(2, moveis.getQuantidade());
+            ps.setBigDecimal(3, moveis.getValorAluguel());
             ps.setInt(4, moveis.getCor().getCodCor());
-            ps.setInt(5, moveis.getSubCategoria().getCodsct());
-            ps.setString(6, moveis.getSitmov());
-            ps.setInt(7, moveis.getCodmov());
+            ps.setInt(5, moveis.getSubCategoria().getId());
+            ps.setString(6, moveis.getSituacao());
+            ps.setInt(7, moveis.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -63,7 +63,7 @@ public class MoveisDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM MOVEIS WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, moveis.getCodmov());
+            ps.setInt(1, moveis.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -77,16 +77,16 @@ public class MoveisDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM MOVEIS WHERE CODMOV = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, moveis.getCodmov());
+            ps.setInt(1, moveis.getId());
             ResultSet rs = ps.executeQuery(); //SELECT CODPRO, DESPRO, CODCOR, CODSCT FROM PRODUTO
             if (rs.next()) {
-                moveis.setCodmov(rs.getInt(1));
-                moveis.setDesmov(rs.getString(2));
-                moveis.setQtdmov(rs.getInt(3));
-                moveis.setVlralu(rs.getBigDecimal(4));
-                moveis.getCor().setCodcor(rs.getInt(5));
-                moveis.getSubCategoria().setCodsct(rs.getInt(6));
-                moveis.setSitmov(rs.getString(7));
+                moveis.setId(rs.getInt(1));
+                moveis.setDescricao(rs.getString(2));
+                moveis.setQuantidade(rs.getInt(3));
+                moveis.setValorAluguel(rs.getBigDecimal(4));
+                moveis.getCor().setId(rs.getInt(5));
+                moveis.getSubCategoria().setId(rs.getInt(6));
+                moveis.setSituacao(rs.getString(7));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Móvel não encontrado");
@@ -102,10 +102,10 @@ public class MoveisDao extends DaoPadrao {
     public boolean duplicidade() {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
-            ps.setString(1, moveis.getDesmov());
+            ps.setString(1, moveis.getDescricao());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getString("DESMOV").equals(moveis.getDesmov()) && rs.getInt("CODMOV") != moveis.getCodmov()) {
+                if (rs.getString("DESMOV").equals(moveis.getDescricao()) && rs.getInt("CODMOV") != moveis.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Móvel já cadastrado com este Nome");
                     return false;

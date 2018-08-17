@@ -5,40 +5,40 @@ package pojo;
  */
 public class Cor {
 
-    private int codcor;
-    private String NomCor;
-    private String sitcor;
+    private int id;
+    private String nome;
+    private String situacao;
 
-    public String getNomCor() {
-        return NomCor;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomCor(String NomCor) {
-        this.NomCor = NomCor;
+    public void setNome(String NomCor) {
+        this.nome = NomCor;
     }
 
-    public String getSitcor() {
-        return sitcor;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitcor(String sitcor) {
-        this.sitcor = sitcor;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public int getCodCor() {
-        return codcor;
+        return id;
     }
 
-    public void setCodcor(int codcor) {
-        this.codcor = codcor;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDesCor() {
-        return NomCor;
+        return nome;
     }
 
     public void setDesCor(String NomCor) {
-        this.NomCor = NomCor;
+        this.nome = NomCor;
     }
 
 }

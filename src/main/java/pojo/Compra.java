@@ -10,16 +10,16 @@ import java.util.List;
  */
 public class Compra {
 
-    private int codcpr;
-    private Fornecedor codfor = new Fornecedor();
-    private CondicaoPagamento codpgt = new CondicaoPagamento();
-    private Date datcpr;
-    private String numdoc;
-    private BigDecimal vlrcpr;
-    private BigDecimal vlrfrt;
-    private BigDecimal vlrdes;
-    private String stacpr;
-    private String sitcpr;
+    private int id;
+    private Fornecedor fornecedor = new Fornecedor();
+    private CondicaoPagamento condicaoPagamento = new CondicaoPagamento();
+    private Date dataCompra;
+    private String numeroDocumento;
+    private BigDecimal valorCompra;
+    private BigDecimal valorFrete;
+    private BigDecimal valorDesconto;
+    private String situacao;
+    private String status;
     private List<ItemCompra> itens = new ArrayList();
 
     public List<ItemCompra> getItens() {
@@ -30,84 +30,84 @@ public class Compra {
         this.itens = itens;
     }
 
-    public BigDecimal getVlrfrt() {
-        return vlrfrt;
+    public BigDecimal getValorFrete() {
+        return valorFrete;
     }
 
-    public void setVlrfrt(BigDecimal vlrfrt) {
-        this.vlrfrt = vlrfrt;
+    public void setValorFrete(BigDecimal valorFrete) {
+        this.valorFrete = valorFrete;
     }
 
-    public String getStacpr() {
-        return stacpr;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setStacpr(String stacpr) {
-        this.stacpr = stacpr;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public String getNumdoc() {
-        return numdoc;
+    public String getNumeroDocumento() {
+        return numeroDocumento;
     }
 
-    public void setNumdoc(String numdoc) {
-        this.numdoc = numdoc;
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
-    public CondicaoPagamento getCodpgt() {
-        return codpgt;
+    public CondicaoPagamento getCondicaoPagamento() {
+        return condicaoPagamento;
     }
 
-    public void setCodpgt(CondicaoPagamento codpgt) {
-        this.codpgt = codpgt;
+    public void setCondicaoPagamento(CondicaoPagamento condicaoPagamento) {
+        this.condicaoPagamento = condicaoPagamento;
     }
 
-    public BigDecimal getVlrdes() {
-        return vlrdes;
+    public BigDecimal getValorDesconto() {
+        return valorDesconto;
     }
 
-    public void setVlrdes(BigDecimal vlrdes) {
-        this.vlrdes = vlrdes;
+    public void setValorDesconto(BigDecimal valorDesconto) {
+        this.valorDesconto = valorDesconto;
     }
 
-    public int getCodcpr() {
-        return codcpr;
+    public int getId() {
+        return id;
     }
 
-    public void setCodcpr(int codcpr) {
-        this.codcpr = codcpr;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Fornecedor getCodfor() {
-        return codfor;
+    public Fornecedor getFornecedor() {
+        return fornecedor;
     }
 
-    public void setCodfor(Fornecedor codfor) {
-        this.codfor = codfor;
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
-    public Date getDatcpr() {
-        return datcpr;
+    public Date getDataCompra() {
+        return dataCompra;
     }
 
-    public void setDatcpr(Date datcpr) {
-        this.datcpr = datcpr;
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
-    public BigDecimal getVlrcpr() {
-        return vlrcpr;
+    public BigDecimal getValorCompra() {
+        return valorCompra;
     }
 
-    public void setVlrcpr(BigDecimal vlrcpr) {
-        this.vlrcpr = vlrcpr;
+    public void setValorCompra(BigDecimal valorCompra) {
+        this.valorCompra = valorCompra;
     }
 
-    public String getSitcpr() {
-        return sitcpr;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSitcpr(String sitcpr) {
-        this.sitcpr = sitcpr;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

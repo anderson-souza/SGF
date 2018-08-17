@@ -50,10 +50,10 @@ public class TelaPesquisa extends JInternalFrame implements InternalFrameListene
     public static void getTela(String tituloJanela, String sql, String[] titulos, TelaCadastro tela) {
         if (telaPesquisa == null) {
             telaPesquisa = new TelaPesquisa(tituloJanela, sql, titulos, tela);
-            TelaSistema.jdp.add(telaPesquisa);//Adiciona a tela de pesquisa no jdp
+            TelaSistema.jDesktopPane.add(telaPesquisa);//Adiciona a tela de pesquisa no jDesktopPane
         }
-        TelaSistema.jdp.setSelectedFrame(telaPesquisa);
-        TelaSistema.jdp.moveToFront(telaPesquisa);
+        TelaSistema.jDesktopPane.setSelectedFrame(telaPesquisa);
+        TelaSistema.jDesktopPane.moveToFront(telaPesquisa);
     }
 
     private void preencher() {
@@ -79,7 +79,7 @@ public class TelaPesquisa extends JInternalFrame implements InternalFrameListene
             String pk = (String) tabela.getValueAt(tabela.getSelectedRow(), 0);
             tela.consultarBD(Integer.parseInt(pk));
             dispose();
-            TelaSistema.jdp.remove(this);
+            TelaSistema.jDesktopPane.remove(this);
             telaPesquisa = null;
         }
     }
@@ -110,7 +110,7 @@ public class TelaPesquisa extends JInternalFrame implements InternalFrameListene
 
     @Override
     public void internalFrameClosed(InternalFrameEvent e) {
-        TelaSistema.jdp.remove(telaPesquisa);
+        TelaSistema.jDesktopPane.remove(telaPesquisa);
         telaPesquisa = null;
     }
 

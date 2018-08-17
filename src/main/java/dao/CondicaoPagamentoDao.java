@@ -23,13 +23,13 @@ public class CondicaoPagamentoDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO CONDICAOPGT VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            condicaoPagamento.setCodpgt(pegaGenerator("GCONDICAOPGTO"));
-            ps.setInt(1, condicaoPagamento.getCodpgt());
-            ps.setString(2, condicaoPagamento.getDespgt());
-            ps.setInt(3, condicaoPagamento.getNumpar());
-            ps.setInt(4, condicaoPagamento.getPrapar());
-            ps.setInt(5, condicaoPagamento.getDiacar());
-            ps.setString(6, condicaoPagamento.getSitpgt());
+            condicaoPagamento.setId(pegaGenerator("GCONDICAOPGTO"));
+            ps.setInt(1, condicaoPagamento.getId());
+            ps.setString(2, condicaoPagamento.getDescricao());
+            ps.setInt(3, condicaoPagamento.getNumeroParcelas());
+            ps.setInt(4, condicaoPagamento.getPrazoParcelas());
+            ps.setInt(5, condicaoPagamento.getDiasCarencia());
+            ps.setString(6, condicaoPagamento.getSituacao());
             ps.executeUpdate();
             return duplicidade();
             //return true;
@@ -44,12 +44,12 @@ public class CondicaoPagamentoDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE CONDICAOPGT SET DESPGT = ?, NUMPAR = ?, PRAPAR = ?, DIACAR = ?, SITPGT = ? WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, condicaoPagamento.getDespgt());
-            ps.setInt(2, condicaoPagamento.getNumpar());
-            ps.setInt(3, condicaoPagamento.getPrapar());
-            ps.setInt(4, condicaoPagamento.getDiacar());
-            ps.setString(5, condicaoPagamento.getSitpgt());
-            ps.setInt(6, condicaoPagamento.getCodpgt());
+            ps.setString(1, condicaoPagamento.getDescricao());
+            ps.setInt(2, condicaoPagamento.getNumeroParcelas());
+            ps.setInt(3, condicaoPagamento.getPrazoParcelas());
+            ps.setInt(4, condicaoPagamento.getDiasCarencia());
+            ps.setString(5, condicaoPagamento.getSituacao());
+            ps.setInt(6, condicaoPagamento.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -63,7 +63,7 @@ public class CondicaoPagamentoDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM CONDICAOPGT WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, condicaoPagamento.getCodpgt());
+            ps.setInt(1, condicaoPagamento.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -77,15 +77,15 @@ public class CondicaoPagamentoDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM CONDICAOPGT WHERE CODPGT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, condicaoPagamento.getCodpgt());
+            ps.setInt(1, condicaoPagamento.getId());
             ResultSet rs = ps.executeQuery(); //CODPGT, DESPGT, NUMPAR, PRAPAR, DIACAR
             if (rs.next()) {
-                condicaoPagamento.setCodpgt(rs.getInt(1));
-                condicaoPagamento.setDespgt(rs.getString(2));
-                condicaoPagamento.setNumpar(rs.getInt(3));
-                condicaoPagamento.setPrapar(rs.getInt(4));
-                condicaoPagamento.setDiacar(rs.getInt(5));
-                condicaoPagamento.setSitpgt(rs.getString(6));
+                condicaoPagamento.setId(rs.getInt(1));
+                condicaoPagamento.setDescricao(rs.getString(2));
+                condicaoPagamento.setNumeroParcelas(rs.getInt(3));
+                condicaoPagamento.setPrazoParcelas(rs.getInt(4));
+                condicaoPagamento.setDiasCarencia(rs.getInt(5));
+                condicaoPagamento.setSituacao(rs.getString(6));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Condicao de Pagamento não encontrado");
@@ -101,19 +101,19 @@ public class CondicaoPagamentoDao extends DaoPadrao {
     public boolean duplicidade() {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
-            ps.setString(1, condicaoPagamento.getDespgt());
-            ps.setInt(2, condicaoPagamento.getNumpar());
-            ps.setInt(3, condicaoPagamento.getPrapar());
-            ps.setInt(4, condicaoPagamento.getDiacar());
+            ps.setString(1, condicaoPagamento.getDescricao());
+            ps.setInt(2, condicaoPagamento.getNumeroParcelas());
+            ps.setInt(3, condicaoPagamento.getPrazoParcelas());
+            ps.setInt(4, condicaoPagamento.getDiasCarencia());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println(condicaoPagamento.getDespgt());
-                System.out.println(condicaoPagamento.getNumpar());
-                System.out.println(condicaoPagamento.getPrapar());
-                System.out.println(condicaoPagamento.getDiacar());
-                if ((rs.getString("DESPGT").equals(condicaoPagamento.getDespgt()) || (rs.getInt("NUMPAR") == condicaoPagamento.getNumpar()
-                        && rs.getInt("PRAPAR") == condicaoPagamento.getPrapar() && rs.getInt("DIACAR") == condicaoPagamento.getDiacar()))
-                        && rs.getInt("CODPGT") != condicaoPagamento.getCodpgt()) {
+                System.out.println(condicaoPagamento.getDescricao());
+                System.out.println(condicaoPagamento.getNumeroParcelas());
+                System.out.println(condicaoPagamento.getPrazoParcelas());
+                System.out.println(condicaoPagamento.getDiasCarencia());
+                if ((rs.getString("DESPGT").equals(condicaoPagamento.getDescricao()) || (rs.getInt("NUMPAR") == condicaoPagamento.getNumeroParcelas()
+                        && rs.getInt("PRAPAR") == condicaoPagamento.getPrazoParcelas() && rs.getInt("DIACAR") == condicaoPagamento.getDiasCarencia()))
+                        && rs.getInt("CODPGT") != condicaoPagamento.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Condição de pagamento já cadastrada com esses dados");
                     return false;

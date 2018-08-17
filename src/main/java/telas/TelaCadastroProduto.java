@@ -45,39 +45,39 @@ public class TelaCadastroProduto extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        produto.setCodpro((Integer) campoCodigo.getValor());
-        produto.setDespro((String) campoDescricao.getValor());
-        produto.getSubCategoria().setCodsct((Integer) campoSubCategoria.getValor());
-        produto.getCor().setCodcor((Integer) campoCor.getValor());
-        produto.setPrecus((BigDecimal) campoPreçoCusto.getValor());
-        produto.setPreven((BigDecimal) campoPreçoVenda.getValor());
-        produto.setQtdpro((Integer) campoQuantidade.getValor());
-        produto.setSitpro((String) campoSituacao.getValor());
+        produto.setId((Integer) campoCodigo.getValor());
+        produto.setDescricao((String) campoDescricao.getValor());
+        produto.getSubCategoria().setId((Integer) campoSubCategoria.getValor());
+        produto.getCor().setId((Integer) campoCor.getValor());
+        produto.setPrecoCusto((BigDecimal) campoPreçoCusto.getValor());
+        produto.setPrecoVenda((BigDecimal) campoPreçoVenda.getValor());
+        produto.setQuantidade((Integer) campoQuantidade.getValor());
+        produto.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(produto.getCodpro());
-        campoDescricao.setValor(produto.getDespro());
-        campoSubCategoria.setValor(produto.getSubCategoria().getCodsct());
+        campoCodigo.setValor(produto.getId());
+        campoDescricao.setValor(produto.getDescricao());
+        campoSubCategoria.setValor(produto.getSubCategoria().getId());
         campoCor.setValor(produto.getCor().getCodCor());
-        campoPreçoCusto.setValor(produto.getPrecus());
-        campoPreçoVenda.setValor(produto.getPreven());
-        campoQuantidade.setValor(produto.getQtdpro());
-        campoSituacao.setValor(produto.getSitpro());
+        campoPreçoCusto.setValor(produto.getPrecoCusto());
+        campoPreçoVenda.setValor(produto.getPrecoVenda());
+        campoQuantidade.setValor(produto.getQuantidade());
+        campoSituacao.setValor(produto.getSituacao());
     }
 
     @Override
@@ -112,7 +112,7 @@ public class TelaCadastroProduto extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        produto.setCodpro(pk);
+        produto.setId(pk);
         produtoDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

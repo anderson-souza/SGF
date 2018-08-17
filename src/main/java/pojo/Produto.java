@@ -7,37 +7,37 @@ import java.math.BigDecimal;
  */
 public class Produto {
 
-    private int codpro;
-    private String despro;
+    private int id;
+    private String descricao;
     private Cor cor = new Cor();
     private SubCategoria subCategoria = new SubCategoria();
-    private BigDecimal precus;
-    private BigDecimal preven;
-    private int qtdpro;
-    private String sitpro;
+    private BigDecimal precoCusto;
+    private BigDecimal precoVenda;
+    private int quantidade;
+    private String situacao;
 
-    public String getSitpro() {
-        return sitpro;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitpro(String sitpro) {
-        this.sitpro = sitpro;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodpro() {
-        return codpro;
+    public int getId() {
+        return id;
     }
 
-    public void setCodpro(int codpro) {
-        this.codpro = codpro;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDespro() {
-        return despro;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDespro(String despro) {
-        this.despro = despro;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Cor getCor() {
@@ -56,28 +56,28 @@ public class Produto {
         this.subCategoria = subCategoria;
     }
 
-    public int getQtdpro() {
-        return qtdpro;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQtdpro(int qtdpro) {
-        this.qtdpro = qtdpro;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public BigDecimal getPrecus() {
-        return precus;
+    public BigDecimal getPrecoCusto() {
+        return precoCusto;
     }
 
-    public void setPrecus(BigDecimal precus) {
-        this.precus = precus;
+    public void setPrecoCusto(BigDecimal precoCusto) {
+        this.precoCusto = precoCusto;
     }
 
-    public BigDecimal getPreven() {
-        return preven;
+    public BigDecimal getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setPreven(BigDecimal preven) {
-        this.preven = preven;
+    public void setPrecoVenda(BigDecimal precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
 }

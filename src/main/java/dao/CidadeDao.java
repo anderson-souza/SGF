@@ -22,12 +22,12 @@ public class CidadeDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO CIDADE VALUES(?,?,?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            cidade.setCodcid(pegaGenerator("GCIDADE"));
-            ps.setInt(1, cidade.getCodcid());
+            cidade.setId(pegaGenerator("GCIDADE"));
+            ps.setInt(1, cidade.getId());
             ps.setString(2, cidade.getNomCid());
-            ps.setInt(3, cidade.getEstado().getCodest());
-            ps.setString(4, cidade.getObscid());
-            ps.setString(5, cidade.getSitcid());
+            ps.setInt(3, cidade.getEstado().getId());
+            ps.setString(4, cidade.getObservacao());
+            ps.setString(5, cidade.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -42,10 +42,10 @@ public class CidadeDao extends DaoPadrao {
             String UPDATESQL = "UPDATE CIDADE SET NOMCID = ?, CODEST = ?, OBSCID = ?, SITCID = ? WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, cidade.getNomCid());
-            ps.setInt(2, cidade.getEstado().getCodest());
-            ps.setString(3, cidade.getObscid());
-            ps.setString(4, cidade.getSitcid());
-            ps.setInt(5, cidade.getCodcid());
+            ps.setInt(2, cidade.getEstado().getId());
+            ps.setString(3, cidade.getObservacao());
+            ps.setString(4, cidade.getSituacao());
+            ps.setInt(5, cidade.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -59,7 +59,7 @@ public class CidadeDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM CIDADE WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, cidade.getCodcid());
+            ps.setInt(1, cidade.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -73,14 +73,14 @@ public class CidadeDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM CIDADE WHERE CODCID = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, cidade.getCodcid());
+            ps.setInt(1, cidade.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                cidade.setCodcid(rs.getInt(1));
+                cidade.setId(rs.getInt(1));
                 cidade.setNomCid(rs.getString(2));
-                cidade.getEstado().setCodest(rs.getInt(3));
-                cidade.setObscid(rs.getString(4));
-                cidade.setSitcid(rs.getString(5));
+                cidade.getEstado().setId(rs.getInt(3));
+                cidade.setObservacao(rs.getString(4));
+                cidade.setSituacao(rs.getString(5));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Cidade não encontrado");
@@ -97,10 +97,10 @@ public class CidadeDao extends DaoPadrao {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
             ps.setString(1, cidade.getNomCid());
-            ps.setInt(2, cidade.getEstado().getCodest());
+            ps.setInt(2, cidade.getEstado().getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getString("NOMCID").equals(cidade.getNomCid()) && rs.getInt("CODEST") == cidade.getEstado().getCodest() && rs.getInt("CODCID") != cidade.getCodcid()) {
+                if (rs.getString("NOMCID").equals(cidade.getNomCid()) && rs.getInt("CODEST") == cidade.getEstado().getId() && rs.getInt("CODCID") != cidade.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Cidade já cadastrada com este Nome");
                     return false;

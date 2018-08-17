@@ -22,10 +22,10 @@ public class CategoriaDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO CATEGORIA VALUES(?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            categoria.setCodcat(pegaGenerator("GCATEGORIA"));
-            ps.setInt(1, categoria.getCodcat());
-            ps.setString(2, categoria.getDescat());
-            ps.setString(3, categoria.getSitcat());
+            categoria.setId(pegaGenerator("GCATEGORIA"));
+            ps.setInt(1, categoria.getId());
+            ps.setString(2, categoria.getDescricao());
+            ps.setString(3, categoria.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -39,9 +39,9 @@ public class CategoriaDao extends DaoPadrao {
         try {
             String UPDATESQL = "UPDATE CATEGORIA SET DESCAT = ?, SITCAT = ? WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
-            ps.setString(1, categoria.getDescat());
-            ps.setString(2, categoria.getSitcat());
-            ps.setInt(3, categoria.getCodcat());
+            ps.setString(1, categoria.getDescricao());
+            ps.setString(2, categoria.getSituacao());
+            ps.setInt(3, categoria.getId());
             ps.executeUpdate();//
             return true;
         } catch (SQLException ex) {
@@ -55,7 +55,7 @@ public class CategoriaDao extends DaoPadrao {
         try {
             String DELETESQL = "DELETE FROM CATEGORIA WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(DELETESQL);
-            ps.setInt(1, categoria.getCodcat());
+            ps.setInt(1, categoria.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -69,12 +69,12 @@ public class CategoriaDao extends DaoPadrao {
         try {
             String CONSULTASQL = "SELECT * FROM CATEGORIA WHERE CODCAT = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(CONSULTASQL);
-            ps.setInt(1, categoria.getCodcat());
+            ps.setInt(1, categoria.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                categoria.setCodcat(rs.getInt(1));
-                categoria.setDescat(rs.getString(2));
-                categoria.setSitcat(rs.getString(3));
+                categoria.setId(rs.getInt(1));
+                categoria.setDescricao(rs.getString(2));
+                categoria.setSituacao(rs.getString(3));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Categoria não encontrado");
@@ -91,11 +91,11 @@ public class CategoriaDao extends DaoPadrao {
         try {
             PreparedStatement ps = Conexao.getConexao().prepareStatement(PESQUISADUPLICIDADE);
             //ps.setInt(1, estado.getId());
-            ps.setString(1, categoria.getDescat());
+            ps.setString(1, categoria.getDescricao());
             //ps.setString(2, categoria.getSigla());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getString("DESCAT").equals(categoria.getDescat()) && rs.getInt("CODCAT") != categoria.getCodcat()) {
+                if (rs.getString("DESCAT").equals(categoria.getDescricao()) && rs.getInt("CODCAT") != categoria.getId()) {
                     System.out.println("Registro igual");
                     JOptionPane.showMessageDialog(null, "Categoria já cadastrada com este Nome");
                     return false;

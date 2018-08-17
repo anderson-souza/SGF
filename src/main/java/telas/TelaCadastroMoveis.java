@@ -43,37 +43,37 @@ public class TelaCadastroMoveis extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        moveis.setCodmov((Integer) campoCodigo.getValor());
-        moveis.setDesmov((String) campoDescricao.getValor());
-        moveis.getSubCategoria().setCodsct((Integer) campoSubCategoria.getValor());
-        moveis.getCor().setCodcor((Integer) campoCor.getValor());
-        moveis.setVlralu((BigDecimal) campoValorAluguel.getValor());
-        moveis.setQtdmov((Integer) campoQuantidade.getValor());
-        moveis.setSitmov((String) campoSituacao.getValor());
+        moveis.setId((Integer) campoCodigo.getValor());
+        moveis.setDescricao((String) campoDescricao.getValor());
+        moveis.getSubCategoria().setId((Integer) campoSubCategoria.getValor());
+        moveis.getCor().setId((Integer) campoCor.getValor());
+        moveis.setValorAluguel((BigDecimal) campoValorAluguel.getValor());
+        moveis.setQuantidade((Integer) campoQuantidade.getValor());
+        moveis.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
-        campoCodigo.setValor(moveis.getCodmov());
-        campoDescricao.setValor(moveis.getDesmov());
-        campoSubCategoria.setValor(moveis.getSubCategoria().getCodsct());
+        campoCodigo.setValor(moveis.getId());
+        campoDescricao.setValor(moveis.getDescricao());
+        campoSubCategoria.setValor(moveis.getSubCategoria().getId());
         campoCor.setValor(moveis.getCor().getCodCor());
-        campoValorAluguel.setValor(moveis.getVlralu());
-        campoQuantidade.setValor(moveis.getQtdmov());
-        campoSituacao.setValor(moveis.getSitmov());
+        campoValorAluguel.setValor(moveis.getValorAluguel());
+        campoQuantidade.setValor(moveis.getQuantidade());
+        campoSituacao.setValor(moveis.getSituacao());
     }
 
     @Override
@@ -107,7 +107,7 @@ public class TelaCadastroMoveis extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        moveis.setCodmov(pk);
+        moveis.setId(pk);
         moveisDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

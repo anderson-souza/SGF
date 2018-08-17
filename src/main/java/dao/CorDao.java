@@ -22,10 +22,10 @@ public class CorDao extends DaoPadrao {
         try {
             String INSERTSQL = "INSERT INTO COR VALUES(?,?,?)";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(INSERTSQL);
-            cor.setCodcor(pegaGenerator("GCOR"));
+            cor.setId(pegaGenerator("GCOR"));
             ps.setInt(1, cor.getCodCor());
             ps.setString(2, cor.getDesCor());
-            ps.setString(3, cor.getSitcor());
+            ps.setString(3, cor.getSituacao());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -40,7 +40,7 @@ public class CorDao extends DaoPadrao {
             String UPDATESQL = "UPDATE COR SET DESCOR = ?, SITCOR = ? WHERE CODCOR = ?";
             PreparedStatement ps = Conexao.getConexao().prepareStatement(UPDATESQL);
             ps.setString(1, cor.getDesCor());
-            ps.setString(2, cor.getSitcor());
+            ps.setString(2, cor.getSituacao());
             ps.setInt(3, cor.getCodCor());
             ps.executeUpdate();//
             return true;
@@ -72,9 +72,9 @@ public class CorDao extends DaoPadrao {
             ps.setInt(1, cor.getCodCor());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                cor.setCodcor(rs.getInt(1));
+                cor.setId(rs.getInt(1));
                 cor.setDesCor(rs.getString(2));
-                cor.setSitcor(rs.getString(3));
+                cor.setSituacao(rs.getString(3));
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Cor não encontrado");

@@ -35,29 +35,29 @@ public class TelaCadastroCor extends TelaCadastro {
             tela.addInternalFrameListener(new InternalFrameAdapter() { //Adiciona um listener para verificar quando a tela for fechada, fazendo assim a remoção da mesma junto ao JDesktopPane da TelaSistema e setando a variável tela = null para permitir que a tela possa ser aberta novamente em outro momento. Basicamente o mesmo controle efetuado pela tela de pesquisa, porém de uma forma um pouco diferente.
                 @Override
                 public void internalFrameClosed(InternalFrameEvent e) {
-                    TelaSistema.jdp.remove(tela);
+                    TelaSistema.jDesktopPane.remove(tela);
                     tela = null;
                 }
             });
-            TelaSistema.jdp.add(tela);
+            TelaSistema.jDesktopPane.add(tela);
         }
         //Depois do teste acima, independentemente dela já existir ou não, ela é selecionada e movida para frente
-        TelaSistema.jdp.setSelectedFrame(tela);
-        TelaSistema.jdp.moveToFront(tela);
+        TelaSistema.jDesktopPane.setSelectedFrame(tela);
+        TelaSistema.jDesktopPane.moveToFront(tela);
         return tela;
     }
 
     @Override
     public void setPersistencia() {
-        cor.setCodcor((Integer) campoCodigo.getValor());
+        cor.setId((Integer) campoCodigo.getValor());
         cor.setDesCor((String) campoNome.getValor());
-        cor.setSitcor((String) campoSituacao.getValor());
+        cor.setSituacao((String) campoSituacao.getValor());
     }
 
     public void getPersistencia() {
         campoCodigo.setValor(cor.getCodCor());
         campoNome.setValor(cor.getDesCor());
-        campoSituacao.setValor(cor.getSitcor());
+        campoSituacao.setValor(cor.getSituacao());
     }
 
     @Override
@@ -91,7 +91,7 @@ public class TelaCadastroCor extends TelaCadastro {
     @Override
     public void consultarBD(int pk) {
         super.consultarBD(pk);
-        cor.setCodcor(pk);
+        cor.setId(pk);
         corDao.consultar();
         getPersistencia(); //Em cursos anteriores era o setGUI
     }

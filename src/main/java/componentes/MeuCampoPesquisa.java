@@ -121,9 +121,9 @@ public class MeuCampoPesquisa extends JPanel implements MeuComponente, ActionLis
     public void mostraTelaIncluir() {
         try {
             TelaPadrao tela = (TelaPadrao) telaChamadora.newInstance();
-            TelaPrincipal.jdp.add(tela);
-            TelaPrincipal.jdp.moveToFront(tela);
-            TelaPrincipal.jdp.setSelectedFrame(tela);
+            TelaPrincipal.jDesktopPane.add(tela);
+            TelaPrincipal.jDesktopPane.moveToFront(tela);
+            TelaPrincipal.jDesktopPane.setSelectedFrame(tela);
             TelaPadrao.centraliza(tela);
         } catch (Exception e) {
             e.printStackTrace();

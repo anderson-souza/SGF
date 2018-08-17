@@ -5,31 +5,31 @@ package pojo;
  */
 public class Categoria {
 
-    private int codcat;
-    private String descat;
-    private String sitcat;
+    private int id;
+    private String descricao;
+    private String situacao;
 
-    public String getSitcat() {
-        return sitcat;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setSitcat(String sitcat) {
-        this.sitcat = sitcat;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
-    public int getCodcat() {
-        return codcat;
+    public int getId() {
+        return id;
     }
 
-    public void setCodcat(int codcat) {
-        this.codcat = codcat;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDescat() {
-        return descat;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescat(String descat) {
-        this.descat = descat;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
